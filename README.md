@@ -1,0 +1,2 @@
+# AASMA
+AASMA Project @IST
