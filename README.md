@@ -2,7 +2,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <h3 align="center">AASMA</h3>
+  <h3 align="center">AASMA Placeholder for Report</h3>
 
   <p align="center">
     Some Project
