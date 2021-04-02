@@ -56,7 +56,7 @@ b
 c
 
 <!-- USAGE EXAMPLES -->
-## Brief Chess Introduction
+## Brief Project Introduction
 d
 
 
