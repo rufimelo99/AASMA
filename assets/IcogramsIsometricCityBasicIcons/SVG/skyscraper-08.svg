@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 80 72" enable-background="new 0 0 80 72" xml:space="preserve">
+<g>
+	<polygon fill="#E5E5E5" points="16,0 0,8 0,40 64,72 80,64 80,32 	"/>
+	<g>
+		<polygon fill="#2D3134" points="77,36.5 77,65.5 66,71 66,42 		"/>
+		<polygon opacity="0.45" fill="#262626" points="76,65 76,36.9 77,36.5 77,65.5 66,71 66,70.1 		"/>
+		<polygon opacity="0.5" fill="#E5E5E5" points="78,44 78,45 66,51 66,50 		"/>
+		<polygon opacity="0.5" fill="#E5E5E5" points="78,53 78,54 66,60 66,59 		"/>
+		<polygon fill="#E5E5E5" points="72,68 71,68.5 71,39.2 72,38.7 		"/>
+	</g>
+	<g>
+		<polygon opacity="0.45" fill="#262626" points="56,67 4,41 4,14.5 3,14 3,41.5 56,68 		"/>
+		<polygon fill="#2D3134" points="56,39.5 3,14 3,41.5 56,68 		"/>
+		<g>
+			<polygon opacity="0.5" fill="#E5E5E5" points="3,20 3,21 62,51 62,50 			"/>
+			<polygon opacity="0.5" fill="#E5E5E5" points="3,29 3,30 62,60 62,59 			"/>
+			<polygon fill="#E5E5E5" points="26,53 27,53.5 27,25.5 26,25 			"/>
+			<polygon fill="#E5E5E5" points="20,50 21,50.5 21,22.9 20,22.4 			"/>
+			<polygon fill="#E5E5E5" points="14,47 15,47.5 15,19.9 14,19.4 			"/>
+			<polygon fill="#E5E5E5" points="8,44 9,44.5 9,16.9 8,16.4 			"/>
+			<polygon fill="#E5E5E5" points="38,59 39,59.5 39,31.6 38,31.1 			"/>
+			<polygon fill="#E5E5E5" points="32,56 33,56.5 33,28.6 32,28.1 			"/>
+			<polygon fill="#E5E5E5" points="44,62 45,62.5 45,34.4 44,33.9 			"/>
+			<polygon fill="#E5E5E5" points="50,65 51,65.5 51,37.2 50,36.7 			"/>
+		</g>
+		<polygon opacity="0.2" fill="#FFFFFF" points="56,40 36,55 56,46 		"/>
+		<polygon opacity="0.1" fill="#FFFFFF" points="21,50.5 21.4,50.7 45,41 13,46.5 		"/>
+		<polygon opacity="0.15" fill="#FFFFFF" points="24.1,24.5 11.4,33.6 28.6,26.6 		"/>
+	</g>
+	<polygon fill="#CC291F" points="62,71 58,69 58,37 62,39 	"/>
+	<polygon opacity="0.39" points="80,64 64,72 64,40 80,32 	"/>
+	<polygon opacity="0.06" points="0,40 64,72 64,40 0,8 	"/>
+</g>
+</svg>
