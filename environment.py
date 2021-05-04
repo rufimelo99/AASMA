@@ -1,6 +1,6 @@
 import pygame as pg
 from game.game import Game
-
+MOVE = 1000
 def main():
 
     running = True
@@ -8,6 +8,8 @@ def main():
 
     pg.init()   
     pg.mixer.init()
+    move_event = pg.USEREVENT + 1
+    pg.time.set_timer(move_event, MOVE)
     screen = pg.display.set_mode((0, 0), pg.FULLSCREEN)
     clock = pg.time.Clock()
 
@@ -22,7 +24,7 @@ def main():
 
         while playing:
             # game loop here
-            game.run()
+            game.run(move_event)
 
 if __name__ == "__main__":
     main()

@@ -6,6 +6,7 @@ class Car:
     def __init__(self, position_x, position_y):
         self.position_x = position_x
         self.position_y = position_y
+        self.caminho = []
         if(position_x == 3 and position_y < GRID_HEIGHT-4 and position_y >= 3):
             self.orientation = "taxi_SW"
         elif(position_y == 3 and position_x > 3 and position_x <= GRID_WIDTH-4):
@@ -19,21 +20,10 @@ class Car:
         
         
 
-
-    def update_x(self, x):
+    def new_caminho(self):
+        self.caminho = [[11,3], [10,3], [9,3], [8,3], [7,3], [6,3], [5,3], [4,3], [3,3], [3,4], [3,5],[3,6],[3,7],[3,8],[3,9],[3,10],[3,11], [3,12]]
+    def update(self , x, y):
         self.position_x = x
-        if(self.position_x == 3 and self.position_y < GRID_HEIGHT-4 and self.position_y >= 3):
-            self.orientation = "taxi_SW"
-        elif(self.position_y == 3 and self.position_x > 3 and self.position_x <= GRID_WIDTH-4):
-            self.orientation = "taxi_NW"
-        elif(self.position_y == (int(GRID_HEIGHT/2) - 1) and self.position_x > 3 and self.position_x < GRID_WIDTH-4):
-            self.orientation = "taxi_SE"
-        elif(self.position_y == GRID_HEIGHT - 4 and self.position_x >= 3 and self.position_x < GRID_WIDTH-4):
-            self.orientation = "taxi_SE"
-        else:
-            self.orientation = "taxi_NE"
-        
-    def update_y(self, y):
         self.position_y = y
         if(self.position_x == 3 and self.position_y < GRID_HEIGHT-4 and self.position_y >= 3):
             self.orientation = "taxi_SW"
@@ -45,5 +35,6 @@ class Car:
             self.orientation = "taxi_SE"
         else:
             self.orientation = "taxi_NE"
+        
             
             

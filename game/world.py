@@ -26,13 +26,18 @@ class World:
     #def udpate_car(self, x, y, screen, camera, car):
         #render_pos =  self.world[x][y]["render_pos"]
         #screen.blit(self.tiles[car.orientation], (render_pos[0] + self.width_materials * 1.017 + camera.scroll.x, render_pos[1] + camera.scroll.y + self.height_materials))
+    def new_caminho(self):
+        if(self.list_Cars != []):
+            for car in self.list_Cars:
+                car.new_caminho()
+    def update(self):
+       if(self.list_Cars != []):
+            for car in self.list_Cars:
+                print(car.caminho)
+                if(car.caminho != []):
+                    new = car.caminho.pop(0)
+                    car.update(new[0],new[1]) 
 
-    def update(self, screen, camera):
-        pass
-        #for car in self.list_Cars:
-        #car.update_x(5) 
-        #if(self.list_Cars != []):
-            #print(self.list_Cars[0].position_y)
     
     def draw_road_x(self, x_initial, x_final, y, screen, camera):
         for x in range(x_initial, x_final):
@@ -64,12 +69,10 @@ class World:
                 screen.blit(self.tiles["road_x"], (render_pos[0] + self.width_materials + camera.scroll.x , render_pos[1] + camera.scroll.y + self.height_materials))
     
 
-    def draw_car_x(self, x, y, screen, camera):
+    def draw_car_x(self, x, y, screen, camera, car):
         render_pos =  self.world[x][y]["render_pos"]
-        car = Car(x , y)
-        self.list_Cars.append(car)
         screen.blit(self.tiles[car.orientation], (render_pos[0] + self.width_materials * 1.017 + camera.scroll.x, render_pos[1] + camera.scroll.y + self.height_materials))
-    def draw(self, screen, camera):
+    def draw(self, screen, camera, first):
         #screen.blit(self.world.grass_tiles, (0, 0))
 
         for x in range(self.grid_length_x):
@@ -110,7 +113,15 @@ class World:
         self.draw_road_x(4, GRID_WIDTH-4, int((GRID_HEIGHT/2)-1), screen, camera)
         self.draw_road_y(4, GRID_HEIGHT-4, 3, screen, camera)
         self.draw_road_y(4, GRID_HEIGHT-4, GRID_WIDTH-4, screen, camera)
-        self.draw_car_x(int(GRID_WIDTH*0.7), 3, screen, camera)
+        if(self.list_Cars != []):
+            for car in self.list_Cars:
+                self.draw_car_x(car.position_x, car.position_y, screen, camera, car) 
+        
+        if(first == 0):
+            car = Car(int(GRID_WIDTH*0.7) , 3)
+            self.list_Cars.append(car)
+            self.draw_car_x(int(GRID_WIDTH*0.7), 3, screen, camera, car)
+        
         
 
 

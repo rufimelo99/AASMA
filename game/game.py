@@ -5,8 +5,11 @@ from .settings import TILE_SIZE
 from .settings import GRID_WIDTH
 from .settings import GRID_HEIGHT
 from .settings import BUILD_SIZE
+from .settings import FPS
 from .utils import draw_text
 from .camera import Camera
+import time
+
 class Game:
 
     def __init__(self, screen, clock):
@@ -20,14 +23,16 @@ class Game:
         self.height_materials = self.height * 0.05
         self.camera = Camera(self.width, self.height)
 
-    def run(self):
+    def run(self,move_event):
         self.playing = True
-        
+        self.move_event = move_event
+        x = 0
         while self.playing == True:
-            self.clock.tick(60)
+            self.dt = self.clock.tick(FPS) / 1000
             self.events()
             self.update()
-            self.draw()
+            self.draw(x)
+            x = 1
             
                 
             
@@ -44,24 +49,23 @@ class Game:
                 if event.key == pg.K_ESCAPE:
                     pg.quit()
                     sys.exit()
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_0:
+                    self.world.new_caminho()
+                    print("entrei")
+            if event.type == self.move_event:
+                self.world.update()
 
     def update(self):
 
         self.camera.update()
-        draw_text(
-            self.screen,
-            'fps={}'.format(round(self.clock.get_fps())),
-            25,
-            (255, 255, 255),
-            (10, 10)
-        )
 
 
-    def draw(self):
+    def draw(self,x):
         self.screen.fill((0, 0, 0)) #background
 
         
-        self.world.draw(self.screen, self.camera)
+        self.world.draw(self.screen, self.camera,x)
 
         draw_text(
             self.screen,
