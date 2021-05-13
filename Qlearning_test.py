@@ -5,7 +5,8 @@ rand.seed(42)
 
 #interest pointsd in City
 X=["A","B","C","D"] #States
-A=["goA","goB","goC","goD"]#Actions
+A=[0,1,2,3]#Actions
+#A=["goA","goB","goC","goD"]#Actions
 
 epochs = 0
 
@@ -62,34 +63,6 @@ print(C[s, a])
 print('Discount:', d)
 
 
-def egreedy(state_Qopt,eps):
-    a = rnd.randint(state_Qopt.shape[0])
-    rand=np.random.random(1)[0]
-    choices=[0,1]
-    choice=np.random.choice(choices,1,p=[eps,1-eps])
-    if choice==0:#pode estar errado
-        return a
-    else:
-        min_value=np.min(state_Qopt)
-        mult_occur=0
-        count=0
-        indice=[]
-
-        for value in state_Qopt:#find argmin and if there is mult_occurences
-            if value==min_value:
-                mult_occur+=1
-                indice.append(count)
-            if mult_occur>1:
-                indice.append(count) 
-            count+=1
-
-        if mult_occur==1:
-            a=indice[0]
-            return a
-        if mult_occur>1:
-            a=np.random.choice(indice, 1)
-            return a[0]
-
 
 def qlearning(X, A, P, C, d, n, qinit):
     q=qinit
@@ -106,7 +79,8 @@ def qlearning(X, A, P, C, d, n, qinit):
         nextState = action
         
         cnew= C[currentState, action]
-        #should work as reward and not cost.. we could have something like a difference between the "Fuel" and "Time" wasted
+        #should work as reward and not cost.. 
+        #we will use something related with time, like 1/t
 
         old_value=q[currentState][action]
         next_max=np.max(q[nextState])
@@ -123,5 +97,36 @@ def qlearning(X, A, P, C, d, n, qinit):
 # Initialize Q-function
 qinit = np.zeros((len(A), len(A)))
 
-qnew = qlearning(X, A, P, C, d, 100000, qinit)
+qnew = qlearning(X, A, P, C, d, 10000, qinit)
+print(qnew)
+
+#for each iteration of the learning process
+#maybe after reach certain number of epochs its policy becomes greedy
+#-> instead of np.choice, we would hvae it searching for themaximum
+def qlearningIteration(X, A, P, C, d, qinit, currentState, time):
+    q=qinit
+    alpha=0.3
+    gamma=0.9
+
+    #linalg.norm() nao funcionou..TODO
+    total =qnew[currentState][0]+qnew[currentState][1]+qnew[currentState][2]+qnew[currentState][3]
+    
+    action = np.random.choice(A, 1, p=qnew[currentState]/total)
+    print(action)
+    
+    nextState = action[0]
+    
+    cnew= 1/time
+
+    old_value=q[currentState][action]
+    next_max=np.max(q[nextState])
+
+    q[currentState][action]=(1-alpha)*old_value+alpha*(cnew+gamma*next_max)
+
+    currentState = nextState
+
+    return q
+
+
+qnew = qlearningIteration(X, A, P, C, d, qinit, 0, 3)
 print(qnew)
