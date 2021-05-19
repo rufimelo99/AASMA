@@ -37,21 +37,28 @@ class World:
             for car in self.list_Cars:
                 if(car.caminho == []):
                     randomChoice = car.driverAgent.generateRandomTrip()
-                    start = (car.position_x, car.position_y)
-                    print(f"Actual Position: {start}")
-                    end = (self.GPS.interestPointsDic[randomChoice].entryX,self.GPS.interestPointsDic[randomChoice].entryY)                    
-                    print(self.GPS.interestPointsDic['A'].entryX,self.GPS.interestPointsDic['A'].entryY)
-                    print(self.GPS.interestPointsDic['B'].entryX,self.GPS.interestPointsDic['B'].entryY)
-                    print(self.GPS.interestPointsDic['C'].entryX,self.GPS.interestPointsDic['C'].entryY)
-                    print(self.GPS.interestPointsDic['D'].entryX,self.GPS.interestPointsDic['D'].entryY)
-                    print(self.GPS.interestPointsDic['E'].entryX,self.GPS.interestPointsDic['E'].entryY)
-                    print(self.GPS.interestPointsDic['F'].entryX,self.GPS.interestPointsDic['F'].entryY)
-                    print(self.GPS.interestPointsDic['G'].entryX,self.GPS.interestPointsDic['G'].entryY)
-                    
-                    print(f"destionation Position: {end}")
-                    path = astar(CITY, start, end)
+                    print(f"Random Choice: {randomChoice}")
+                    path=[]
+                    if(randomChoice == 'A'):
+                        path=car.actualInterestPoint.pathToA
+                    elif(randomChoice == 'B'):
+                        path=car.actualInterestPoint.pathToB
+                    elif(randomChoice == 'C'):
+                        path=car.actualInterestPoint.pathToC
+                    elif(randomChoice == 'D'):
+                        path=car.actualInterestPoint.pathToD
+                    elif(randomChoice == 'E'):
+                        path=car.actualInterestPoint.pathToE
+                    elif(randomChoice == 'F'):
+                        path=car.actualInterestPoint.pathToF
+                    elif(randomChoice == 'G'):
+                        path=car.actualInterestPoint.pathToG
+                    #start = (car.position_x, car.position_y)
+                    #print(f"Actual Position: {start}")
+                    #end = (self.GPS.interestPointsDic[randomChoice].entryX,self.GPS.interestPointsDic[randomChoice].entryY)                    
+                    #print(f"destionation Position: {end}")
                     car.caminho = path
-                    print(path)
+                    car.nextInterestPointName = randomChoice
 
 
     def update(self):
@@ -61,6 +68,9 @@ class World:
                     print(car.caminho)
                     new = car.caminho.pop(0)
                     car.update(new[0],new[1]) 
+                    if(car.caminho == []):
+                        car.actualInterestPoint = self.GPS.interestPointsDic[car.nextInterestPointName]
+                        car.nextInterestPointName = None
 
     
     def draw_road_x(self, x_initial, x_final, y, screen, camera):
@@ -142,9 +152,10 @@ class World:
         
         if(first == 0):
             driverAgent0 = driverAgent(0, self.GPS)
-            car = Car(int(GRID_WIDTH*0.7) , 3, driverAgent0)
+            car = Car(int(GRID_WIDTH*0.65) , 3, driverAgent0)
+            car.actualInterestPoint = self.GPS.interestPointsDic['A']
             self.list_Cars.append(car)
-            self.draw_car_x(int(GRID_WIDTH*0.7), 3, screen, camera, car)
+            self.draw_car_x(int(GRID_WIDTH*0.65), 3, screen, camera, car)
             
 
     def create_world(self):

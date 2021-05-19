@@ -11,6 +11,8 @@ class Car:
         self.position_x = position_x
         self.position_y = position_y
         self.caminho = []
+        self.actualInterestPoint = None
+        self.nextInterestPoint = None
         if(position_x == 3 and position_y < GRID_HEIGHT-4 and position_y >= 3):
             self.orientation = "taxi_SW"
         elif(position_y == 3 and position_x > 3 and position_x <= GRID_WIDTH-4):
