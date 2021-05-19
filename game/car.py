@@ -1,9 +1,13 @@
 
 from .settings import GRID_HEIGHT
 from .settings import GRID_WIDTH
+from .interestPoints import interestPoints
+from .parkingSpot import parkingSpot
+from .driverAgent import driverAgent
 
 class Car:
-    def __init__(self, position_x, position_y):
+    def __init__(self, position_x, position_y, driverAgent):
+        self.driverAgent = driverAgent
         self.position_x = position_x
         self.position_y = position_y
         self.caminho = []
@@ -17,11 +21,11 @@ class Car:
             self.orientation = "taxi_SE"
         else:
             self.orientation = "taxi_NE"
-        
-        
 
     def new_caminho(self):
-        self.caminho = [[11,3], [10,3], [9,3], [8,3], [7,3], [6,3], [5,3], [4,3], [3,3], [3,4], [3,5],[3,6],[3,7],[3,8],[3,9],[3,10],[3,11], [3,12]]
+        self.caminho = [[11,3], [10,3], [9,3], [8,3], [7,3], [6,3], [5,3], [4,3], [3,3], [3,4], [3,5],[3,6],[3,7],[3,8],[3,9],[3,10],[3,11], [3,12], [3,13], [3,14]]
+        
+        
     def update(self , x, y):
         self.position_x = x
         self.position_y = y

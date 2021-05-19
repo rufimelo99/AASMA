@@ -33,12 +33,6 @@ class Game:
             self.update()
             self.draw(x)
             x = 1
-            
-                
-            
-        
-            
-            
 
     def events(self): 
         for event in pg.event.get():
@@ -59,7 +53,6 @@ class Game:
     def update(self):
 
         self.camera.update()
-
 
     def draw(self,x):
         self.screen.fill((0, 0, 0)) #background

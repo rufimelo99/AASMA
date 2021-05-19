@@ -5,9 +5,14 @@ from .settings import GRID_WIDTH
 from .settings import GRID_HEIGHT
 from .settings import BUILD_SIZE
 from .car import Car
+from .interestPoints import interestPoints
+from .GPS import GPS
+from .GPS import CITY
+from .GPS import astar
+from .driverAgent import driverAgent
+
 
 class World:
-
     def __init__(self, grid_length_x, grid_length_y, width, height):
         self.grid_length_x = grid_length_x
         self.grid_length_y = grid_length_y
@@ -22,19 +27,38 @@ class World:
         self.list_Cars = []
         self.tiles = self.load_images()
         self.world = self.create_world()
-    
+        self.GPS=GPS()
+        
     #def udpate_car(self, x, y, screen, camera, car):
         #render_pos =  self.world[x][y]["render_pos"]
         #screen.blit(self.tiles[car.orientation], (render_pos[0] + self.width_materials * 1.017 + camera.scroll.x, render_pos[1] + camera.scroll.y + self.height_materials))
     def new_caminho(self):
         if(self.list_Cars != []):
             for car in self.list_Cars:
-                car.new_caminho()
+                if(car.caminho == []):
+                    randomChoice = car.driverAgent.generateRandomTrip()
+                    start = (car.position_x, car.position_y)
+                    print(f"Actual Position: {start}")
+                    end = (self.GPS.interestPointsDic[randomChoice].entryX,self.GPS.interestPointsDic[randomChoice].entryY)                    
+                    print(self.GPS.interestPointsDic['A'].entryX,self.GPS.interestPointsDic['A'].entryY)
+                    print(self.GPS.interestPointsDic['B'].entryX,self.GPS.interestPointsDic['B'].entryY)
+                    print(self.GPS.interestPointsDic['C'].entryX,self.GPS.interestPointsDic['C'].entryY)
+                    print(self.GPS.interestPointsDic['D'].entryX,self.GPS.interestPointsDic['D'].entryY)
+                    print(self.GPS.interestPointsDic['E'].entryX,self.GPS.interestPointsDic['E'].entryY)
+                    print(self.GPS.interestPointsDic['F'].entryX,self.GPS.interestPointsDic['F'].entryY)
+                    print(self.GPS.interestPointsDic['G'].entryX,self.GPS.interestPointsDic['G'].entryY)
+                    
+                    print(f"destionation Position: {end}")
+                    path = astar(CITY, start, end)
+                    car.caminho = path
+                    print(path)
+
+
     def update(self):
        if(self.list_Cars != []):
             for car in self.list_Cars:
-                print(car.caminho)
                 if(car.caminho != []):
+                    print(car.caminho)
                     new = car.caminho.pop(0)
                     car.update(new[0],new[1]) 
 
@@ -67,8 +91,6 @@ class World:
             else:        
                 render_pos =  self.world[x][y]["render_pos"]
                 screen.blit(self.tiles["road_x"], (render_pos[0] + self.width_materials + camera.scroll.x , render_pos[1] + camera.scroll.y + self.height_materials))
-    
-
     def draw_car_x(self, x, y, screen, camera, car):
         render_pos =  self.world[x][y]["render_pos"]
         screen.blit(self.tiles[car.orientation], (render_pos[0] + self.width_materials * 1.017 + camera.scroll.x, render_pos[1] + camera.scroll.y + self.height_materials))
@@ -99,7 +121,7 @@ class World:
                     screen.blit(self.tiles["building"], (render_pos[0] + self.width_materials + camera.scroll.x, render_pos[1] + camera.scroll.y + (self.height_materials - (self.tiles["building"].get_height() - TILE_SIZE))* 1.1))
                 if( x == int(GRID_WIDTH*0.7) and y == int(GRID_HEIGHT*0.35)):
                     screen.blit(self.tiles["court"], (render_pos[0] + self.width_materials + camera.scroll.x, render_pos[1] + camera.scroll.y + (self.height_materials - (self.tiles["court"].get_height() - TILE_SIZE))* 1.4))
-                
+
                 
 
                 #p = self.world[x][y]["iso_poly"]
@@ -111,6 +133,7 @@ class World:
         self.draw_road_x(4, GRID_WIDTH-4, 3, screen, camera)
         self.draw_road_x(4, GRID_WIDTH-4, GRID_HEIGHT-4, screen, camera)
         self.draw_road_x(4, GRID_WIDTH-4, int((GRID_HEIGHT/2)-1), screen, camera)
+        
         self.draw_road_y(4, GRID_HEIGHT-4, 3, screen, camera)
         self.draw_road_y(4, GRID_HEIGHT-4, GRID_WIDTH-4, screen, camera)
         if(self.list_Cars != []):
@@ -118,12 +141,11 @@ class World:
                 self.draw_car_x(car.position_x, car.position_y, screen, camera, car) 
         
         if(first == 0):
-            car = Car(int(GRID_WIDTH*0.7) , 3)
+            driverAgent0 = driverAgent(0, self.GPS)
+            car = Car(int(GRID_WIDTH*0.7) , 3, driverAgent0)
             self.list_Cars.append(car)
             self.draw_car_x(int(GRID_WIDTH*0.7), 3, screen, camera, car)
-        
-        
-
+            
 
     def create_world(self):
 
@@ -137,9 +159,11 @@ class World:
 
                 #render_pos = world_tile["render_pos"]
                 #self.grass_tiles.blit(self.tiles["block"], (render_pos[0] + self.width_materials, render_pos[1] + self.height_materials))
-        
+        """
+        for i in world:
+            for j in i:
+                print(j) """
         return world
-    
     def grid_to_world(self, grid_x, grid_y):
 
         rect = [
@@ -170,7 +194,6 @@ class World:
         iso_x = x - y
         iso_y = (x + y)/2
         return iso_x, iso_y
-
     def load_images(self):
         block = pg.image.load("assets/block.png").convert_alpha()
         pavement = pg.image.load("assets/pavement.png").convert_alpha()
@@ -193,4 +216,4 @@ class World:
         taxi_SE = pg.image.load("assets/taxi_SE.png").convert_alpha()
         taxi_SW = pg.image.load("assets/taxi_SW.png").convert_alpha()
         taxi_NE = pg.image.load("assets/taxi_NE.png").convert_alpha()
-        return {"block": block, "pavement": pavement, "road_x": road_x, "road_y": road_y,"road_24": road_24, "road_25": road_25,"road_26": road_26, "road_27": road_27,"road_33": road_33, "road_35": road_35, "hospital": hospital, "restaurant": restaurant, "market": market, "school": school, "skyscraper": skyscraper, "building" : building, "court": court, "taxi_NW": taxi_NW, "taxi_SE": taxi_SE, "taxi_SW": taxi_SW, "taxi_NE": taxi_NE}
+        return {"block": block, "pavement": pavement, "road_x": road_x, "road_y": road_y,"road_24": road_24, "road_25": road_25,"road_26": road_26, "road_27": road_27,"road_33": road_33, "road_35": road_35, "hospital": hospital, "restaurant": restaurant, "market": market, "school": school, "skyscraper": skyscraper, "building" : building, "court": court, "taxi_NW": taxi_NW, "taxi_SE": taxi_SE, "taxi_SW": taxi_SW, "taxi_NE": taxi_NE}  

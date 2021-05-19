@@ -10,7 +10,14 @@ def main():
     pg.mixer.init()
     move_event = pg.USEREVENT + 1
     pg.time.set_timer(move_event, MOVE)
-    screen = pg.display.set_mode((0, 0), pg.FULLSCREEN)
+    #Fullscreen
+    #screen = pg.display.set_mode((0, 0), pg.FULLSCREEN)
+    
+    #For Dev
+    screen_width=1500
+    screen_height=900
+    screen=pg.display.set_mode([screen_width, screen_height])
+    
     clock = pg.time.Clock()
 
     # implement menus
