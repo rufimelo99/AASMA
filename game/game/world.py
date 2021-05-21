@@ -7,6 +7,7 @@ from .settings import BUILD_SIZE
 from .car import Car
 from .person import Person
 from .GPS import GPS
+from .carState import carState
 
 class World:
 
@@ -20,14 +21,14 @@ class World:
         self.height_materials = self.height * 0.05
 
         #self.grass_tiles = pg.Surface((width, height))
-        self.cars_locals = {1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 7: []}
-        self.n_persons_locals = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0}
         self.list_persons = []
         self.list_Cars = []
         self.tiles = self.load_images()
         self.world = self.create_world()
         self.GPS=GPS()
-        print(self.GPS)
+        self.locals = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+
+        self.a = 0
         
         
 
@@ -46,39 +47,116 @@ class World:
             for person in self.list_persons:
                 if(person.origem == 'A'):
                     if(self.GPS.interestPointsDic['A'].cars != []):
-                        print("1")
+                        car = self.GPS.interestPointsDic['A'].cars.pop()
+                        for i in range(len(self.GPS.interestPointsDic['A'].parkingSpots)):
+                            if(self.GPS.interestPointsDic['A'].parkingSpots[i].Id == car.parkingSpotID):
+                                    self.GPS.interestPointsDic['A'].parkingSpots[i].available=True
+                        car.caminho = self.GPS.interestPointsDic['A'].paths[person.destino].copy()
+                        self.list_persons.remove(person)
+                        car.setperson(person)
+                        car.state = carState.OCCUPIED
+                        car.local = person.destino
+                    elif(self.GPS.interestPointsDic['F'].cars != []):
+                        car = self.GPS.interestPointsDic['F'].cars.pop()
+                        for i in range(len(self.GPS.interestPointsDic['F'].parkingSpots)):
+                            if(self.GPS.interestPointsDic['F'].parkingSpots[i].Id == car.parkingSpotID):
+                                    self.GPS.interestPointsDic['F'].parkingSpots[i].available=True
+                        car.caminho = self.GPS.interestPointsDic['F'].pathToA + self.GPS.interestPointsDic['A'].paths[person.destino]
+                        self.list_persons.remove(person)
+                        car.setperson(person)
+                        car.state = carState.OCCUPIED
+                        car.local = person.destino
                     elif(self.GPS.interestPointsDic['G'].cars != []):
                         car = self.GPS.interestPointsDic['G'].cars.pop()
                         for i in range(len(self.GPS.interestPointsDic['G'].parkingSpots)):
                             if(self.GPS.interestPointsDic['G'].parkingSpots[i].Id == car.parkingSpotID):
                                     self.GPS.interestPointsDic['G'].parkingSpots[i].available=True
-                        if(person.destino == 'B'):
-                            car.caminho = self.GPS.interestPointsDic['G'].pathToA + self.GPS.interestPointsDic['A'].pathToB
-                        elif(person.destino == 'C'):
-                            car.caminho = self.GPS.interestPointsDic['G'].pathToA + self.GPS.interestPointsDic['A'].pathToC
-                        elif(person.destino == 'D'):
-                            car.caminho = self.GPS.interestPointsDic['G'].pathToA + self.GPS.interestPointsDic['A'].pathToD
-                        elif(person.destino == 'E'):
-                            car.caminho = self.GPS.interestPointsDic['G'].pathToA + self.GPS.interestPointsDic['A'].pathToE
-                        elif(person.destino == 'F'):
-                            car.caminho = self.GPS.interestPointsDic['G'].pathToA + self.GPS.interestPointsDic['A'].pathToF
-                        elif(person.destino == 'G'):
-                            car.caminho = self.GPS.interestPointsDic['G'].pathToA + self.GPS.interestPointsDic['A'].pathToG
-                        
+                        car.caminho = self.GPS.interestPointsDic['G'].pathToA + self.GPS.interestPointsDic['A'].paths[person.destino]
+                        self.list_persons.remove(person)
                         car.setperson(person)
+                        car.state = carState.OCCUPIED
+                        car.local = person.destino
+                    elif(self.GPS.interestPointsDic['E'].cars != []):
+                        car = self.GPS.interestPointsDic['E'].cars.pop()
+                        for i in range(len(self.GPS.interestPointsDic['E'].parkingSpots)):
+                            if(self.GPS.interestPointsDic['E'].parkingSpots[i].Id == car.parkingSpotID):
+                                    self.GPS.interestPointsDic['E'].parkingSpots[i].available=True
+                        car.caminho = self.GPS.interestPointsDic['E'].pathToA + self.GPS.interestPointsDic['A'].paths[person.destino]
+                        self.list_persons.remove(person)
+                        car.setperson(person)
+                        car.state = carState.OCCUPIED
+                        car.local = person.destino
+                    
+                    elif(self.GPS.interestPointsDic['B'].cars != []):
+                        car = self.GPS.interestPointsDic['B'].cars.pop()
+                        for i in range(len(self.GPS.interestPointsDic['B'].parkingSpots)):
+                            if(self.GPS.interestPointsDic['B'].parkingSpots[i].Id == car.parkingSpotID):
+                                    self.GPS.interestPointsDic['B'].parkingSpots[i].available=True
+                        car.caminho = self.GPS.interestPointsDic['B'].pathToA + self.GPS.interestPointsDic['A'].paths[person.destino]
+                        self.list_persons.remove(person)
+                        car.setperson(person)
+                        car.state = carState.OCCUPIED
+                        car.local = person.destino
+                    
+                    elif(self.GPS.interestPointsDic['D'].cars != []):
+                        car = self.GPS.interestPointsDic['D'].cars.pop()
+                        for i in range(len(self.GPS.interestPointsDic['D'].parkingSpots)):
+                            if(self.GPS.interestPointsDic['D'].parkingSpots[i].Id == car.parkingSpotID):
+                                    self.GPS.interestPointsDic['D'].parkingSpots[i].available=True
+                        car.caminho = self.GPS.interestPointsDic['D'].pathToA + self.GPS.interestPointsDic['A'].paths[person.destino]
+                        self.list_persons.remove(person)
+                        car.setperson(person)
+                        car.state = carState.OCCUPIED
+                        car.local = person.destino
+                    
+                    elif(self.GPS.interestPointsDic['C'].cars != []):
+                        car = self.GPS.interestPointsDic['C'].cars.pop()
+                        for i in range(len(self.GPS.interestPointsDic['C'].parkingSpots)):
+                            if(self.GPS.interestPointsDic['C'].parkingSpots[i].Id == car.parkingSpotID):
+                                    self.GPS.interestPointsDic['C'].parkingSpots[i].available=True
+                        car.caminho = self.GPS.interestPointsDic['C'].pathToA + self.GPS.interestPointsDic['A'].paths[person.destino]
+                        self.list_persons.remove(person)
+                        car.setperson(person)
+                        car.state = carState.OCCUPIED
+                        car.local = person.destino
+
+
+                    
                     
         
         if(self.list_Cars != []):
+            self.a += 1
             for car in self.list_Cars:
                 if(car.caminho != []):
                     new = car.caminho.pop(0)
-                    car.update(new[0],new[1])
-                    if(car.person != None):
+                    car.update(new[0],new[1]) 
+                    if(car.person != None and car.state == carState.OCCUPIED):
                         if(car.person.cordenadas[0] == car.position_x and car.person.cordenadas[1] == car.position_y):
                             self.GPS.interestPointsDic[car.person.origem].numberpersons -= 1
-                            car.person = None
+                            
+                
+                elif(car.state == carState.OCCUPIED):
+                    car.person = None
+                    car.selectRandomNewParkingLot(self.locals,self.GPS.interestPointsDic)
+                elif(car.state == carState.SEARCH_NEW_PARK):
+                    parkingSpot = self.GPS.parkingLot(car.local)
+                    if(parkingSpot != None):
+                        parkingSpot.available = False
+                        car.parkingSpotID =  parkingSpot.Id
+                        car.position_x = parkingSpot.posX
+                        car.position_y =  parkingSpot.posY
+                        car.state = carState.FREE
+                        self.GPS.interestPointsDic[car.local].cars.append(car)
+                    else:
+                        car.selectRandomNewParkingLot(self.locals,self.GPS.interestPointsDic)
+
+                        
+                        
+
+
                         
                     
+
 
     def generate_person(self):
         person = Person('A','D',[10,3])
@@ -92,8 +170,6 @@ class World:
         
         for i in self.GPS.interestPointsDic:
             if(self.GPS.interestPointsDic[i].numberpersons > 0):
-                print("entrei")
-                print(i)
                 if(self.GPS.interestPointsDic[i].Id == 'A'):
                     x = 11
                     y = 1
@@ -193,20 +269,11 @@ class World:
         
         if(first == 0):
             car = Car(1, int(GRID_WIDTH*0.6) , int((GRID_HEIGHT/2)), 'G', 0)
-            print(int(GRID_WIDTH*0.6))
-            print(int(GRID_HEIGHT/2))
             self.GPS.interestPointsDic['G'].cars.append(car)
             for i in range(len(self.GPS.interestPointsDic['G'].parkingSpots)):
                 if(self.GPS.interestPointsDic['G'].parkingSpots[i].Id == 0):
                     self.GPS.interestPointsDic['G'].parkingSpots[i].available=False
-            
-            for i in range(len(self.GPS.interestPointsDic['G'].parkingSpots)):
-                print(self.GPS.interestPointsDic['G'].parkingSpots[i].available)
 
-
-
-        
-            self.cars_locals[3].append(car)
             self.list_Cars.append(car)
             self.draw_car_x(screen, camera, car)
         

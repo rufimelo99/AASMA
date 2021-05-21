@@ -1,14 +1,16 @@
 
 from .settings import GRID_HEIGHT
 from .settings import GRID_WIDTH
+from .carState import carState
+import random
 
 #car states 1 - search parking | lot 2 - free | 3 - occupied
 
 class Car:
     def __init__(self, ID, position_x, position_y, local,parkingSpotID):
+        self.state = carState.FREE
         self.id = ID
         self.parkingSpotID = parkingSpotID
-        self.state = 2
         self.position_x = position_x
         self.position_y = position_y
         self.caminho = []
@@ -44,5 +46,14 @@ class Car:
         else:
             self.orientation = "taxi_NE"
         
-            
-            
+
+
+    def selectRandomNewParkingLot(self, localss,interestPointsDic):
+        new_local = random.choice(localss)
+        if(new_local != self.local):
+            self.caminho = interestPointsDic[self.local].paths[new_local].copy()
+        else:
+            self.caminho = []
+        self.local = new_local
+        self.state = carState.SEARCH_NEW_PARK        
+        

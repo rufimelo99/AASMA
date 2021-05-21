@@ -9,9 +9,9 @@ class GPS:
     def createInterestPointsAndPaths(self):
         interestPointsDic = {}
         #Hospital
-        parkingSpotA_0 = parkingSpot(0,11,2)
-        parkingSpotA_1 = parkingSpot(1,10,2)
-        parkingSpotA_2 = parkingSpot(2,9,2)
+        parkingSpotA_0 = parkingSpot(0,6,0)
+        parkingSpotA_1 = parkingSpot(1,7,0)
+        parkingSpotA_2 = parkingSpot(2,6,1)
         parkingSpotA = []
         parkingSpotA.append(parkingSpotA_0)
         parkingSpotA.append(parkingSpotA_1)
@@ -19,18 +19,18 @@ class GPS:
 
         interestPointA = interestPoints('A',11,3, parkingSpotA)
         #Restaurant
-        parkingSpotB_0 = parkingSpot(0,2,7)
-        parkingSpotB_1 = parkingSpot(1,2,8)
-        parkingSpotB_2 = parkingSpot(2,2,9)
+        parkingSpotB_0 = parkingSpot(0,0,5)
+        parkingSpotB_1 = parkingSpot(1,0,4)
+        parkingSpotB_2 = parkingSpot(2,1,5)
         parkingSpotB = []
         parkingSpotB.append(parkingSpotB_0)
         parkingSpotB.append(parkingSpotB_1)
         parkingSpotB.append(parkingSpotB_2)
         interestPointB = interestPoints('B',3,9, parkingSpotB)
         #School
-        parkingSpotC_0 = parkingSpot(0,2,24)
-        parkingSpotC_1 = parkingSpot(1,2,25)
-        parkingSpotC_2 = parkingSpot(2,2,26)
+        parkingSpotC_0 = parkingSpot(0,0,19)
+        parkingSpotC_1 = parkingSpot(1,0,20)
+        parkingSpotC_2 = parkingSpot(2,1,19)
         parkingSpotC = []
         parkingSpotC.append(parkingSpotC_0)
         parkingSpotC.append(parkingSpotC_1)
@@ -38,18 +38,18 @@ class GPS:
         interestPointC = interestPoints('C',3,25, parkingSpotC)
         
         #Skyscrapper
-        parkingSpotD_0 = parkingSpot(0,8,31)
-        parkingSpotD_1 = parkingSpot(1,9,31)
-        parkingSpotD_2 = parkingSpot(2,10,31)
+        parkingSpotD_0 = parkingSpot(0,8,33)
+        parkingSpotD_1 = parkingSpot(1,9,33)
+        parkingSpotD_2 = parkingSpot(2,8,34)
         parkingSpotD = []
         parkingSpotD.append(parkingSpotD_0)
         parkingSpotD.append(parkingSpotD_1)
         parkingSpotD.append(parkingSpotD_2)
         interestPointD = interestPoints('D',9,32, parkingSpotD)
         #Building
-        parkingSpotE_0 = parkingSpot(0,13,23)
-        parkingSpotE_1 = parkingSpot(1,14,23)
-        parkingSpotE_2 = parkingSpot(2,15,23)
+        parkingSpotE_0 = parkingSpot(0,15,23)
+        parkingSpotE_1 = parkingSpot(1,15,24)
+        parkingSpotE_2 = parkingSpot(2,16,23)
         parkingSpotE = []
         parkingSpotE.append(parkingSpotE_0)
         parkingSpotE.append(parkingSpotE_1)
@@ -57,9 +57,9 @@ class GPS:
         interestPointE = interestPoints('E',14,24, parkingSpotE)
 
         #Court
-        parkingSpotF_0 = parkingSpot(0,13,9)
-        parkingSpotF_1 = parkingSpot(1,13,10)
-        parkingSpotF_2 = parkingSpot(2,13,11)
+        parkingSpotF_0 = parkingSpot(0,15,9)
+        parkingSpotF_1 = parkingSpot(1,15,9)
+        parkingSpotF_2 = parkingSpot(2,16,10)
         parkingSpotF = []
         parkingSpotF.append(parkingSpotF_0)
         parkingSpotF.append(parkingSpotF_1)
@@ -68,8 +68,8 @@ class GPS:
 
         #Market
         parkingSpotG_0 = parkingSpot(0,10,18)
-        parkingSpotG_1 = parkingSpot(1,8,16)
-        parkingSpotG_2 = parkingSpot(2,9,16)
+        parkingSpotG_1 = parkingSpot(1,9,18)
+        parkingSpotG_2 = parkingSpot(2,10,19)
         parkingSpotG = []
         parkingSpotG.append(parkingSpotG_0)
         parkingSpotG.append(parkingSpotG_1)
@@ -82,9 +82,9 @@ class GPS:
 
         path_A_to_B = [(11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9)]
         path_A_to_C = [(11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (3, 18), (3, 19), (3, 20), (3, 21), (3, 22), (3, 23), (3, 24), (3, 25)]
-        path_A_to_D = [(11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (3, 18), (3, 19), (3, 20), (3, 21), (3, 22), (3, 23), (3, 24), (3, 25), (3, 25), (3, 26), (3, 27), (3, 28), (3, 29), (3, 30), (3, 31), (3, 32), (4, 32), (5, 32), (6, 32), (7, 32), (8, 32), (9, 32)]
-        path_A_to_E = [(11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (3, 18), (3, 19), (3, 20), (3, 21), (3, 22), (3, 23), (3, 24), (3, 25), (3, 25), (3, 26), (3, 27), (3, 28), (3, 29), (3, 30), (3, 31), (3, 32), (4, 32), (5, 32), (6, 32), (7, 32), (8, 32), (9, 32), (10, 32), (11, 32), (12, 32), (13, 32), (14, 32), (14, 31), (14, 30), (14, 29), (14, 28), (14, 27), (14, 26), (14, 25), (14, 24)]
-        path_A_to_F = [(11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (3, 18), (3, 19), (3, 20), (3, 21), (3, 22), (3, 23), (3, 24), (3, 25), (3, 25), (3, 26), (3, 27), (3, 28), (3, 29), (3, 30), (3, 31), (3, 32), (4, 32), (5, 32), (6, 32), (7, 32), (8, 32), (9, 32), (10, 32), (11, 32), (12, 32), (13, 32), (14, 32), (14, 31), (14, 30), (14, 29), (14, 28), (14, 27), (14, 26), (14, 25), (14, 24), (14, 23), (14, 22), (14, 21), (14, 20), (14, 19), (14, 18), (14, 17), (14, 16), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11), (14, 10)]
+        path_A_to_D = [(11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (3, 18), (3, 19), (3, 20), (3, 21), (3, 22), (3, 23), (3, 24), (3, 25), (3, 26), (3, 27), (3, 28), (3, 29), (3, 30), (3, 31), (3, 32), (4, 32), (5, 32), (6, 32), (7, 32), (8, 32), (9, 32)]
+        path_A_to_E = [(11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (3, 18), (3, 19), (3, 20), (3, 21), (3, 22), (3, 23), (3, 24), (3, 25), (3, 26), (3, 27), (3, 28), (3, 29), (3, 30), (3, 31), (3, 32), (4, 32), (5, 32), (6, 32), (7, 32), (8, 32), (9, 32), (10, 32), (11, 32), (12, 32), (13, 32), (14, 32), (14, 31), (14, 30), (14, 29), (14, 28), (14, 27), (14, 26), (14, 25), (14, 24)]
+        path_A_to_F = [(11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (3, 18), (3, 19), (3, 20), (3, 21), (3, 22), (3, 23), (3, 24), (3, 25), (3, 26), (3, 27), (3, 28), (3, 29), (3, 30), (3, 31), (3, 32), (4, 32), (5, 32), (6, 32), (7, 32), (8, 32), (9, 32), (10, 32), (11, 32), (12, 32), (13, 32), (14, 32), (14, 31), (14, 30), (14, 29), (14, 28), (14, 27), (14, 26), (14, 25), (14, 24), (14, 23), (14, 22), (14, 21), (14, 20), (14, 19), (14, 18), (14, 17), (14, 16), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11), (14, 10)]
         path_A_to_G = [(11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (4, 17), (5, 17), (6, 17), (7, 17), (8, 17)]
 
         path_B_to_A = [(3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (4, 17), (5, 17), (6, 17), (7, 17), (8, 17), (9, 17), (10, 17), (11, 17), (12, 17), (13, 17), (14, 17), (14, 16), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11), (14, 10), (14, 9), (14, 8), (14, 7), (14, 6), (14, 5), (14, 4), (14, 3), (13, 3), (12, 3), (11, 3)]
@@ -103,7 +103,7 @@ class GPS:
 
         path_D_to_A = [(9, 32), (10, 32), (11, 32), (12, 32), (13, 32), (14, 32), (14, 31), (14, 30), (14, 29), (14, 28), (14, 27), (14, 26), (14, 25), (14, 24), (14, 23), (14, 22), (14, 21), (14, 20), (14, 19), (14, 18), (14, 17), (14, 16), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11), (14, 10), (14, 9), (14, 8), (14, 7), (14, 6), (14, 5), (14, 4), (14, 3), (13, 3), (12, 3), (11, 3)]
         path_D_to_B = [(9, 32), (10, 32), (11, 32), (12, 32), (13, 32), (14, 32), (14, 31), (14, 30), (14, 29), (14, 28), (14, 27), (14, 26), (14, 25), (14, 24), (14, 23), (14, 22), (14, 21), (14, 20), (14, 19), (14, 18), (14, 17), (14, 16), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11), (14, 10), (14, 9), (14, 8), (14, 7), (14, 6), (14, 5), (14, 4), (14, 3), (13, 3), (12, 3), (11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9)]
-        path_D_to_C = [(9, 32), (10, 32), (11, 32), (12, 32), (13, 32), (14, 32), (14, 31), (14, 30), (14, 29), (14, 28), (14, 27), (14, 26), (14, 25), (14, 24), (14, 23), (14, 22), (14, 21), (14, 20), (14, 19), (14, 18), (14, 17), (14, 16), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11), (14, 10), (14, 9), (14, 8), (14, 7), (14, 6), (14, 5), (14, 4), (14, 3), (13, 3), (12, 3), (11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 26), (3, 27), (3, 28), (3, 29), (3, 30), (3, 31), (3, 32), (4, 32), (5, 32), (6, 32), (7, 32), (8, 32), (9, 32)]
+        path_D_to_C = [(9, 32), (10, 32), (11, 32), (12, 32), (13, 32), (14, 32), (14, 31), (14, 30), (14, 29), (14, 28), (14, 27), (14, 26), (14, 25), (14, 24), (14, 23), (14, 22), (14, 21), (14, 20), (14, 19), (14, 18), (14, 17), (14, 16), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11), (14, 10), (14, 9), (14, 8), (14, 7), (14, 6), (14, 5), (14, 4), (14, 3), (13, 3), (12, 3), (11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (3, 18), (3, 19), (3, 20), (3, 21), (3, 22),(3, 23), (3, 24), (3, 25)]
         path_D_to_E = [(9, 32), (10, 32), (11, 32), (12, 32), (13, 32), (14, 32), (14, 31), (14, 30), (14, 29), (14, 28), (14, 27), (14, 26), (14, 25), (14, 24)]
         path_D_to_F = [(9, 32), (10, 32), (11, 32), (12, 32), (13, 32), (14, 32), (14, 31), (14, 30), (14, 29), (14, 28), (14, 27), (14, 26), (14, 25), (14, 24), (14, 23), (14, 22), (14, 21), (14, 20), (14, 19), (14, 18), (14, 17), (14, 16), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11), (14, 10)]
         path_D_to_G = [(9, 32), (10, 32), (11, 32), (12, 32), (13, 32), (14, 32), (14, 31), (14, 30), (14, 29), (14, 28), (14, 27), (14, 26), (14, 25), (14, 24), (14, 23), (14, 22), (14, 21), (14, 20), (14, 19), (14, 18), (14, 17), (14, 16), (14, 15), (14, 14), (14, 13), (14, 12), (14, 11), (14, 10), (14, 9), (14, 8), (14, 7), (14, 6), (14, 5), (14, 4), (14, 3), (13, 3), (12, 3), (11, 3), (10, 3), (9, 3), (8, 3), (7, 3), (6, 3), (5, 3), (4, 3), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11), (3, 12), (3, 13), (3, 14), (3, 15), (3, 16), (3, 17), (4, 17), (5, 17), (6, 17), (7, 17), (8, 17)]
@@ -145,12 +145,26 @@ class GPS:
         interestPointA.pathToF = path_A_to_F
         interestPointA.pathToG = path_A_to_G
 
+        interestPointA.paths['B'] = path_A_to_B
+        interestPointA.paths['C'] = path_A_to_C
+        interestPointA.paths['D'] = path_A_to_D
+        interestPointA.paths['E'] = path_A_to_E
+        interestPointA.paths['F'] = path_A_to_F
+        interestPointA.paths['G'] = path_A_to_G
+
         interestPointB.pathToA = path_B_to_A
         interestPointB.pathToC = path_B_to_C
         interestPointB.pathToD = path_B_to_D
         interestPointB.pathToE = path_B_to_E
         interestPointB.pathToF = path_B_to_F
         interestPointB.pathToG = path_B_to_G
+
+        interestPointB.paths['A'] = path_B_to_A
+        interestPointB.paths['C'] = path_B_to_C
+        interestPointB.paths['D'] = path_B_to_D
+        interestPointB.paths['E'] = path_B_to_E
+        interestPointB.paths['F'] = path_B_to_F
+        interestPointB.paths['G'] = path_B_to_G
 
         interestPointC.pathToA = path_C_to_A
         interestPointC.pathToB = path_C_to_B
@@ -159,12 +173,30 @@ class GPS:
         interestPointC.pathToF = path_C_to_F
         interestPointC.pathToG = path_C_to_G
 
+        interestPointC.paths['A'] = path_C_to_A
+        interestPointC.paths['B'] = path_C_to_B
+        interestPointC.paths['D'] = path_C_to_D
+        interestPointC.paths['E'] = path_C_to_E
+        interestPointC.paths['F'] = path_C_to_F
+        interestPointC.paths['G'] = path_C_to_G
+
+
+
         interestPointD.pathToA = path_D_to_A
         interestPointD.pathToB = path_D_to_B
         interestPointD.pathToC = path_D_to_C
         interestPointD.pathToE = path_D_to_E
         interestPointD.pathToF = path_D_to_F
         interestPointD.pathToG = path_D_to_G
+
+        interestPointD.paths['A'] = path_D_to_A
+        interestPointD.paths['B'] = path_D_to_B
+        interestPointD.paths['C'] = path_D_to_C
+        interestPointD.paths['E'] = path_D_to_E
+        interestPointD.paths['F'] = path_D_to_F
+        interestPointD.paths['G'] = path_D_to_G
+
+
 
         interestPointE.pathToA = path_E_to_A
         interestPointE.pathToB = path_E_to_B
@@ -173,6 +205,13 @@ class GPS:
         interestPointE.pathToF = path_E_to_F
         interestPointE.pathToG = path_E_to_G
 
+        interestPointE.paths['A'] = path_E_to_A
+        interestPointE.paths['B'] = path_E_to_B
+        interestPointE.paths['C'] = path_E_to_C
+        interestPointE.paths['D'] = path_E_to_D
+        interestPointE.paths['F'] = path_E_to_F
+        interestPointE.paths['G'] = path_E_to_G
+
         interestPointF.pathToA = path_F_to_A
         interestPointF.pathToB = path_F_to_B
         interestPointF.pathToC = path_F_to_C
@@ -180,12 +219,26 @@ class GPS:
         interestPointF.pathToE = path_F_to_E
         interestPointF.pathToG = path_F_to_G
 
+        interestPointF.paths['A'] = path_F_to_A
+        interestPointF.paths['B'] = path_F_to_B
+        interestPointF.paths['C'] = path_F_to_C
+        interestPointF.paths['D'] = path_F_to_D
+        interestPointF.paths['E'] = path_F_to_E
+        interestPointF.paths['G'] = path_F_to_G
+
         interestPointG.pathToA = path_G_to_A
         interestPointG.pathToB = path_G_to_B
         interestPointG.pathToC = path_G_to_C
         interestPointG.pathToD = path_G_to_D
         interestPointG.pathToE = path_G_to_E
         interestPointG.pathToF = path_G_to_F
+
+        interestPointG.paths['A'] = path_G_to_A
+        interestPointG.paths['B'] = path_G_to_B
+        interestPointG.paths['C'] = path_G_to_C
+        interestPointG.paths['D'] = path_G_to_D
+        interestPointG.paths['E'] = path_G_to_E
+        interestPointG.paths['F'] = path_G_to_F
 
         interestPointsDic['A'] = interestPointA
         interestPointsDic['B'] = interestPointB
@@ -195,3 +248,14 @@ class GPS:
         interestPointsDic['F'] = interestPointF
         interestPointsDic['G'] = interestPointG
         return interestPointsDic
+    
+
+    
+    
+
+    def parkingLot(self,local):
+        for i in self.interestPointsDic[local].parkingSpots:
+            if(i.available == True):
+                return i
+        return None
+        

@@ -10,6 +10,7 @@ class interestPoints:
         self.entryY = entryY
         #place to park after
         self.parkingSpots = parkingSpots
+        self.paths = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': []}
         self.pathToA = []
         self.pathToB = []
         self.pathToC = []
