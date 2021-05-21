@@ -49,7 +49,9 @@ class Car:
 
 
     def selectRandomNewParkingLot(self, localss,interestPointsDic):
-        new_local = random.choice(localss)
+        #new_local = random.choice(localss)
+        new_local = 'B'
+        print("novo estacionamento" + new_local)
         if(new_local != self.local):
             self.caminho = interestPointsDic[self.local].paths[new_local].copy()
         else:

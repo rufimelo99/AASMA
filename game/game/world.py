@@ -8,6 +8,7 @@ from .car import Car
 from .person import Person
 from .GPS import GPS
 from .carState import carState
+import random
 
 class World:
 
@@ -45,7 +46,22 @@ class World:
     def update_car(self):
         if(self.list_persons != []):
             for person in self.list_persons:
-                if(person.origem == 'A'):
+                for park in self.GPS.interestPointsDic[person.origem].closest_parking_lots:
+                    if(self.GPS.interestPointsDic[park].cars != []):
+                        car = self.GPS.interestPointsDic[park].cars.pop()
+                        for i in range(len(self.GPS.interestPointsDic[park].parkingSpots)):
+                            if(self.GPS.interestPointsDic[park].parkingSpots[i].Id == car.parkingSpotID):
+                                    self.GPS.interestPointsDic[park].parkingSpots[i].available=True
+                        if(park != person.origem):
+                            car.caminho = self.GPS.interestPointsDic[park].paths[person.origem] + self.GPS.interestPointsDic[person.origem].paths[person.destino]
+                        else:
+                            car.caminho = self.GPS.interestPointsDic[park].paths[person.destino].copy()
+                        self.list_persons.remove(person)
+                        car.setperson(person)
+                        car.state = carState.OCCUPIED
+                        car.local = person.destino
+                        
+                '''if(person.origem == 'A'):
                     if(self.GPS.interestPointsDic['A'].cars != []):
                         car = self.GPS.interestPointsDic['A'].cars.pop()
                         for i in range(len(self.GPS.interestPointsDic['A'].parkingSpots)):
@@ -119,13 +135,13 @@ class World:
                         car.setperson(person)
                         car.state = carState.OCCUPIED
                         car.local = person.destino
+                '''
 
 
                     
                     
         
         if(self.list_Cars != []):
-            self.a += 1
             for car in self.list_Cars:
                 if(car.caminho != []):
                     new = car.caminho.pop(0)
@@ -159,9 +175,113 @@ class World:
 
 
     def generate_person(self):
-        person = Person('A','D',[10,3])
-        self.GPS.interestPointsDic['A'].numberpersons += 1
-        self.list_persons.append(person)
+        ticketA = int(random.random() * 99) + 1 
+        ticketB = int(random.random() * 99) + 1 
+        ticketC = int(random.random() * 99) + 1 
+        ticketD = int(random.random() * 99) + 1 
+        ticketE = int(random.random() * 99) + 1 
+        ticketF = int(random.random() * 99) + 1 
+        ticketG = int(random.random() * 99) + 1
+        '''
+        if(ticketA <= 100):
+            
+            print("A")
+            destino = new_local = random.choice(self.locals)
+            while(destino == 'A'):
+                destino = new_local = random.choice(self.locals)
+            
+            print(destino)
+            personA = Person('A','G',[10,3])
+            self.GPS.interestPointsDic['A'].numberpersons += 1
+            self.list_persons.append(personA)
+            print("div")
+        '''
+        
+        if(ticketB <= 100):
+            destino = new_local = random.choice(self.locals)
+            while(destino == 'B'):
+                destino = new_local = random.choice(self.locals)
+            
+            print("origem: B" + "destino: " + destino)
+            personB = Person('B','G',[3,10])
+            self.GPS.interestPointsDic['B'].numberpersons += 1
+            self.list_persons.append(personB)
+            print("div")
+        
+        
+
+        '''
+        if(ticketC <= 100):
+            
+            print("C")
+            destino = new_local = random.choice(self.locals)
+            while(destino == 'C'):
+                destino = new_local = random.choice(self.locals)
+            
+            print(destino)
+            personC = Person('C','G',[3,26])
+            self.GPS.interestPointsDic['C'].numberpersons += 1
+            self.list_persons.append(personC)
+            print("div")
+        '''
+
+
+        '''
+        if(ticketD <= 100):
+            
+            print("D")
+            destino = new_local = random.choice(self.locals)
+            while(destino == 'D'):
+                destino = new_local = random.choice(self.locals)
+            
+            print(destino)
+            personD = Person('D','G',[10,32])
+            self.GPS.interestPointsDic['D'].numberpersons += 1
+            self.list_persons.append(personD)
+            print("div")
+        '''
+        '''
+        if(ticketE <= 100):
+            
+            print("A")
+            destino = new_local = random.choice(self.locals)
+            while(destino == 'E'):
+                destino = new_local = random.choice(self.locals)
+            
+            print(destino)
+            personE = Person('E','G',[14,23])
+            self.GPS.interestPointsDic['E'].numberpersons += 1
+            self.list_persons.append(personE)
+            print("div")
+        '''
+        '''
+        if(ticketF <= 100):
+            
+            print("F")
+            destino = new_local = random.choice(self.locals)
+            while(destino == 'F'):
+                destino = new_local = random.choice(self.locals)
+            
+            print(destino)
+            personF = Person('F','G',[14,9])
+            self.GPS.interestPointsDic['F'].numberpersons += 1
+            self.list_persons.append(personF)
+            print("div")
+        '''
+        '''
+        if(ticketG <= 100):
+            
+            print("G")
+            destino = new_local = random.choice(self.locals)
+            while(destino == 'G'):
+                destino = new_local = random.choice(self.locals)
+            
+            print(destino)
+            personG = Person('G','A',[9,17])
+            self.GPS.interestPointsDic['G'].numberpersons += 1
+            self.list_persons.append(personG)
+            print("div")
+        '''
         
         
     
@@ -175,9 +295,36 @@ class World:
                     y = 1
                     render_pos =  self.world[x][y]["render_pos"]
                     screen.blit(self.tiles["man"], (render_pos[0] + self.width_materials + camera.scroll.x, render_pos[1]  + camera.scroll.y + (self.height_materials - (self.tiles["man"].get_height() - TILE_SIZE))* 1.2))
-                    
-                    
-            
+                elif(self.GPS.interestPointsDic[i].Id == 'B'):
+                    x = 2
+                    y = 8
+                    render_pos =  self.world[x][y]["render_pos"]
+                    screen.blit(self.tiles["basicman"], (render_pos[0] + self.width_materials + camera.scroll.x, render_pos[1]  + camera.scroll.y + (self.height_materials - (self.tiles["man"].get_height() - TILE_SIZE))* 1.2))
+                elif(self.GPS.interestPointsDic[i].Id == 'C'):
+                    x = 2
+                    y = 24
+                    render_pos =  self.world[x][y]["render_pos"]
+                    screen.blit(self.tiles["basicman"], (render_pos[0] + self.width_materials + camera.scroll.x, render_pos[1]  + camera.scroll.y + (self.height_materials - (self.tiles["man"].get_height() - TILE_SIZE))* 1.2))   
+                elif(self.GPS.interestPointsDic[i].Id == 'D'):
+                    x = 9
+                    y = 30
+                    render_pos =  self.world[x][y]["render_pos"]
+                    screen.blit(self.tiles["man"], (render_pos[0] + self.width_materials + camera.scroll.x, render_pos[1]  + camera.scroll.y + (self.height_materials - (self.tiles["man"].get_height() - TILE_SIZE))* 1.2))
+                elif(self.GPS.interestPointsDic[i].Id == 'E'):
+                    x = 13
+                    y = 23
+                    render_pos =  self.world[x][y]["render_pos"]
+                    screen.blit(self.tiles["basicman"], (render_pos[0] + self.width_materials + camera.scroll.x, render_pos[1]  + camera.scroll.y + (self.height_materials - (self.tiles["man"].get_height() - TILE_SIZE))* 1.2))
+                elif(self.GPS.interestPointsDic[i].Id == 'F'):
+                    x = 13
+                    y = 9
+                    render_pos =  self.world[x][y]["render_pos"]
+                    screen.blit(self.tiles["basicman"], (render_pos[0] + self.width_materials + camera.scroll.x, render_pos[1]  + camera.scroll.y + (self.height_materials - (self.tiles["man"].get_height() - TILE_SIZE))* 1.2))
+                elif(self.GPS.interestPointsDic[i].Id == 'G'):
+                    x = 8
+                    y = 15
+                    render_pos =  self.world[x][y]["render_pos"]
+                    screen.blit(self.tiles["man"], (render_pos[0] + self.width_materials + camera.scroll.x, render_pos[1]  + camera.scroll.y + (self.height_materials - (self.tiles["man"].get_height() - TILE_SIZE))* 1.2))  
         
 
         
@@ -355,4 +502,5 @@ class World:
         taxi_SW = pg.image.load("assets/taxi_SW.png").convert_alpha()
         taxi_NE = pg.image.load("assets/taxi_NE.png").convert_alpha()
         man = pg.image.load("assets/man.png").convert_alpha()
-        return {"block": block, "pavement": pavement, "road_x": road_x, "road_y": road_y,"road_24": road_24, "road_25": road_25,"road_26": road_26, "road_27": road_27,"road_33": road_33, "road_35": road_35, "hospital": hospital, "restaurant": restaurant, "market": market, "school": school, "skyscraper": skyscraper, "building" : building, "court": court, "taxi_NW": taxi_NW, "taxi_SE": taxi_SE, "taxi_SW": taxi_SW, "taxi_NE": taxi_NE, "man": man}
+        basicman = pg.image.load("assets/basicman.png").convert_alpha()
+        return {"block": block, "pavement": pavement, "road_x": road_x, "road_y": road_y,"road_24": road_24, "road_25": road_25,"road_26": road_26, "road_27": road_27,"road_33": road_33, "road_35": road_35, "hospital": hospital, "restaurant": restaurant, "market": market, "school": school, "skyscraper": skyscraper, "building" : building, "court": court, "taxi_NW": taxi_NW, "taxi_SE": taxi_SE, "taxi_SW": taxi_SW, "taxi_NE": taxi_NE, "man": man, "basicman": basicman}
