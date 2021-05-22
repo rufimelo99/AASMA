@@ -40,7 +40,10 @@ class GPS:
         parkingSpotC.append(parkingSpotC_0)
         parkingSpotC.append(parkingSpotC_1)
         parkingSpotC.append(parkingSpotC_2)
-        interestPointC = interestPoints('C',3,25, parkingSpotC, closest_parking_lots_A)
+
+        closest_parking_lots_C = ['C', 'B', 'A', 'F', 'G', 'E', 'D']
+
+        interestPointC = interestPoints('C',3,25, parkingSpotC, closest_parking_lots_C)
         
         #Skyscrapper
         parkingSpotD_0 = parkingSpot(0,8,33)
@@ -50,7 +53,10 @@ class GPS:
         parkingSpotD.append(parkingSpotD_0)
         parkingSpotD.append(parkingSpotD_1)
         parkingSpotD.append(parkingSpotD_2)
-        interestPointD = interestPoints('D',9,32, parkingSpotD, closest_parking_lots_A)
+
+        closest_parking_lots_D = ['D', 'C', 'B', 'A', 'F', 'G', 'E']
+
+        interestPointD = interestPoints('D',9,32, parkingSpotD, closest_parking_lots_D)
         #Building
         parkingSpotE_0 = parkingSpot(0,15,23)
         parkingSpotE_1 = parkingSpot(1,15,24)
@@ -59,17 +65,23 @@ class GPS:
         parkingSpotE.append(parkingSpotE_0)
         parkingSpotE.append(parkingSpotE_1)
         parkingSpotE.append(parkingSpotE_2)
-        interestPointE = interestPoints('E',14,24, parkingSpotE, closest_parking_lots_A)
+
+        closest_parking_lots_E = ['E', 'D', 'C', 'B', 'A', 'F', 'G']
+
+        interestPointE = interestPoints('E',14,24, parkingSpotE, closest_parking_lots_E)
 
         #Court
         parkingSpotF_0 = parkingSpot(0,15,9)
-        parkingSpotF_1 = parkingSpot(1,15,9)
+        parkingSpotF_1 = parkingSpot(1,15,10)
         parkingSpotF_2 = parkingSpot(2,16,10)
         parkingSpotF = []
         parkingSpotF.append(parkingSpotF_0)
         parkingSpotF.append(parkingSpotF_1)
         parkingSpotF.append(parkingSpotF_2)
-        interestPointF = interestPoints('F',14,10, parkingSpotF, closest_parking_lots_A)
+
+        closest_parking_lots_F = ['F', 'G', 'E', 'B', 'D', 'C', 'A']
+
+        interestPointF = interestPoints('F',14,10, parkingSpotF, closest_parking_lots_F)
 
         #Market
         parkingSpotG_0 = parkingSpot(0,10,18)
@@ -79,7 +91,10 @@ class GPS:
         parkingSpotG.append(parkingSpotG_0)
         parkingSpotG.append(parkingSpotG_1)
         parkingSpotG.append(parkingSpotG_2)
-        interestPointG = interestPoints('G',8,17, parkingSpotG, closest_parking_lots_A)
+
+        closest_parking_lots_G = ['G', 'B', 'A', 'F', 'E', 'D', 'C']
+
+        interestPointG = interestPoints('G',8,17, parkingSpotG, closest_parking_lots_G)
 
 
 

@@ -18,7 +18,7 @@ class Game:
         self.width, self.height = self.screen.get_size()
         
         self.world = World(GRID_WIDTH, GRID_HEIGHT, self.width, self.height)
-
+        self.pause = False
         self.width_materials = self.width * 0.65
         self.height_materials = self.height * 0.05
         self.camera = Camera(self.width, self.height)
@@ -50,6 +50,9 @@ class Game:
                 if event.key == pg.K_ESCAPE:
                     pg.quit()
                     sys.exit()
+                if event.key == pg.K_p:
+                    self.pause = True
+                    self.paused()
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_0:
                     self.world.new_caminho()
@@ -63,6 +66,19 @@ class Game:
     def update(self):
 
         self.camera.update()
+
+    def paused(self):
+        while self.pause:
+            for event in pg.event.get():
+                if event.type == pg.KEYDOWN:
+                    if event.key == pg.K_p:
+                        self.pause = False
+                    if event.key == pg.K_ESCAPE:
+                        pg.quit()
+                        sys.exit()
+                if event.type == pg.QUIT:
+                    pg.quit()
+                    sys.exit()
 
 
     def draw(self,x):

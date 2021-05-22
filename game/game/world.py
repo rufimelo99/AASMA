@@ -48,7 +48,7 @@ class World:
             for person in self.list_persons:
                 for park in self.GPS.interestPointsDic[person.origem].closest_parking_lots:
                     if(self.GPS.interestPointsDic[park].cars != []):
-                        car = self.GPS.interestPointsDic[park].cars.pop()
+                        car = self.GPS.interestPointsDic[park].cars.pop(0)
                         for i in range(len(self.GPS.interestPointsDic[park].parkingSpots)):
                             if(self.GPS.interestPointsDic[park].parkingSpots[i].Id == car.parkingSpotID):
                                     self.GPS.interestPointsDic[park].parkingSpots[i].available=True
@@ -60,6 +60,7 @@ class World:
                         car.setperson(person)
                         car.state = carState.OCCUPIED
                         car.local = person.destino
+                        break
                         
                 '''if(person.origem == 'A'):
                     if(self.GPS.interestPointsDic['A'].cars != []):
@@ -175,6 +176,7 @@ class World:
 
 
     def generate_person(self):
+        pessoas = 0
         ticketA = int(random.random() * 99) + 1 
         ticketB = int(random.random() * 99) + 1 
         ticketC = int(random.random() * 99) + 1 
@@ -182,106 +184,101 @@ class World:
         ticketE = int(random.random() * 99) + 1 
         ticketF = int(random.random() * 99) + 1 
         ticketG = int(random.random() * 99) + 1
-        '''
-        if(ticketA <= 100):
-            
+        
+        if(ticketA <= 40):
+            pessoas += 1
             print("A")
             destino = new_local = random.choice(self.locals)
             while(destino == 'A'):
                 destino = new_local = random.choice(self.locals)
             
-            print(destino)
-            personA = Person('A','G',[10,3])
+            
+            personA = Person('A',destino,[10,3])
             self.GPS.interestPointsDic['A'].numberpersons += 1
             self.list_persons.append(personA)
-            print("div")
-        '''
         
-        if(ticketB <= 100):
+        if(ticketB <= 40):
+            pessoas += 1
+            print("B")
             destino = new_local = random.choice(self.locals)
             while(destino == 'B'):
                 destino = new_local = random.choice(self.locals)
             
-            print("origem: B" + "destino: " + destino)
-            personB = Person('B','G',[3,10])
+            personB = Person('B',destino,[3,10])
             self.GPS.interestPointsDic['B'].numberpersons += 1
             self.list_persons.append(personB)
-            print("div")
+            
         
         
 
-        '''
-        if(ticketC <= 100):
-            
+        
+        if(ticketC <= 10):
+            pessoas += 1
             print("C")
             destino = new_local = random.choice(self.locals)
             while(destino == 'C'):
                 destino = new_local = random.choice(self.locals)
             
-            print(destino)
-            personC = Person('C','G',[3,26])
+            
+            personC = Person('C',destino,[3,26])
             self.GPS.interestPointsDic['C'].numberpersons += 1
             self.list_persons.append(personC)
-            print("div")
-        '''
-
-
-        '''
-        if(ticketD <= 100):
             
+        
+
+
+        
+        if(ticketD <= 50):
+            pessoas += 1
             print("D")
             destino = new_local = random.choice(self.locals)
             while(destino == 'D'):
                 destino = new_local = random.choice(self.locals)
             
-            print(destino)
-            personD = Person('D','G',[10,32])
+           
+            personD = Person('D',destino,[10,32])
             self.GPS.interestPointsDic['D'].numberpersons += 1
             self.list_persons.append(personD)
-            print("div")
-        '''
-        '''
-        if(ticketE <= 100):
             
-            print("A")
+        if(ticketE <= 30):
+            pessoas += 1
+            print("E")
             destino = new_local = random.choice(self.locals)
             while(destino == 'E'):
                 destino = new_local = random.choice(self.locals)
             
-            print(destino)
-            personE = Person('E','G',[14,23])
+            
+            personE = Person('E',destino,[14,23])
             self.GPS.interestPointsDic['E'].numberpersons += 1
             self.list_persons.append(personE)
-            print("div")
-        '''
-        '''
-        if(ticketF <= 100):
             
+        if(ticketF <= 5):
+            pessoas += 1
             print("F")
             destino = new_local = random.choice(self.locals)
             while(destino == 'F'):
                 destino = new_local = random.choice(self.locals)
             
-            print(destino)
-            personF = Person('F','G',[14,9])
+            
+            personF = Person('F',destino,[14,9])
             self.GPS.interestPointsDic['F'].numberpersons += 1
             self.list_persons.append(personF)
-            print("div")
-        '''
-        '''
-        if(ticketG <= 100):
             
+        if(ticketG <= 20):
+            pessoas += 1
             print("G")
             destino = new_local = random.choice(self.locals)
             while(destino == 'G'):
                 destino = new_local = random.choice(self.locals)
             
-            print(destino)
-            personG = Person('G','A',[9,17])
+            
+            personG = Person('G',destino,[9,17])
             self.GPS.interestPointsDic['G'].numberpersons += 1
             self.list_persons.append(personG)
-            print("div")
-        '''
+            
+        
+        print(pessoas)
+        
         
         
     
@@ -415,16 +412,68 @@ class World:
             self.draw_people(screen, camera)
         
         if(first == 0):
+            '''
+            carteste1 = Car(1, 0, 5, 'B', 0)
+            self.GPS.interestPointsDic['B'].cars.append(carteste1)
+            for i in range(len(self.GPS.interestPointsDic['B'].parkingSpots)):
+                if(self.GPS.interestPointsDic['B'].parkingSpots[i].Id == 0):
+                    self.GPS.interestPointsDic['B'].parkingSpots[i].available=False
+
+            carteste2 = Car(2, 15, 23, 'E', 0)
+            self.GPS.interestPointsDic['E'].cars.append(carteste2)
+            for i in range(len(self.GPS.interestPointsDic['E'].parkingSpots)):
+                if(self.GPS.interestPointsDic['E'].parkingSpots[i].Id == 0):
+                    self.GPS.interestPointsDic['E'].parkingSpots[i].available=False
+            
+            self.list_Cars.append(carteste1)
+            self.list_Cars.append(carteste2)
+            self.draw_car_x(screen, camera, carteste1)
+            self.draw_car_x(screen, camera, carteste2)
+            '''
+            
             car = Car(1, int(GRID_WIDTH*0.6) , int((GRID_HEIGHT/2)), 'G', 0)
             self.GPS.interestPointsDic['G'].cars.append(car)
             for i in range(len(self.GPS.interestPointsDic['G'].parkingSpots)):
                 if(self.GPS.interestPointsDic['G'].parkingSpots[i].Id == 0):
                     self.GPS.interestPointsDic['G'].parkingSpots[i].available=False
 
-            self.list_Cars.append(car)
-            self.draw_car_x(screen, camera, car)
-        
+            car2 = Car(2, 6, 0, 'A', 0)
+            self.GPS.interestPointsDic['A'].cars.append(car2)
+            for i in range(len(self.GPS.interestPointsDic['A'].parkingSpots)):
+                if(self.GPS.interestPointsDic['A'].parkingSpots[i].Id == 0):
+                    self.GPS.interestPointsDic['A'].parkingSpots[i].available=False
+            
+            car3 = Car(3, 0, 19, 'C', 0)
+            self.GPS.interestPointsDic['C'].cars.append(car3)
+            for i in range(len(self.GPS.interestPointsDic['C'].parkingSpots)):
+                if(self.GPS.interestPointsDic['C'].parkingSpots[i].Id == 0):
+                    self.GPS.interestPointsDic['C'].parkingSpots[i].available=False
+            
+            
+            car4 = Car(4, 15, 23, 'D', 0)
+            self.GPS.interestPointsDic['D'].cars.append(car4)
+            for i in range(len(self.GPS.interestPointsDic['D'].parkingSpots)):
+                if(self.GPS.interestPointsDic['D'].parkingSpots[i].Id == 0):
+                    self.GPS.interestPointsDic['D'].parkingSpots[i].available=False
 
+            car5 = Car(5, 7, 0, 'A', 0)
+            self.GPS.interestPointsDic['A'].cars.append(car5)
+            for i in range(len(self.GPS.interestPointsDic['A'].parkingSpots)):
+                if(self.GPS.interestPointsDic['A'].parkingSpots[i].Id == 0):
+                    self.GPS.interestPointsDic['A'].parkingSpots[i].available=False
+
+            self.list_Cars.append(car)
+            self.list_Cars.append(car2)
+            self.list_Cars.append(car3)
+            self.list_Cars.append(car4)
+            self.list_Cars.append(car5)
+            self.draw_car_x(screen, camera, car)
+            self.draw_car_x(screen, camera, car2)
+            self.draw_car_x(screen, camera, car3)
+            self.draw_car_x(screen, camera, car4)
+            self.draw_car_x(screen, camera, car5)
+        
+            
         
         
 
