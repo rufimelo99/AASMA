@@ -19,7 +19,9 @@ class GPS:
 
         closest_parking_lots_A = ['A', 'F', 'G', 'E', 'B', 'D', 'C']
 
-        interestPointA = interestPoints('A',11,3, parkingSpotA, closest_parking_lots_A)
+        closestA = ['A' , 'B', 'G', 'C', 'F', 'D', 'E']
+
+        interestPointA = interestPoints('A',11,3, parkingSpotA, closest_parking_lots_A,closestA)
         #Restaurant
         parkingSpotB_0 = parkingSpot(0,0,5)
         parkingSpotB_1 = parkingSpot(1,0,4)
@@ -31,7 +33,9 @@ class GPS:
 
         closest_parking_lots_B = ['B', 'A', 'F', 'G', 'E', 'D', 'C']
 
-        interestPointB = interestPoints('B',3,9, parkingSpotB, closest_parking_lots_B)
+        closestB = ['B', 'G', 'C', 'F', 'D', 'A', 'E']
+
+        interestPointB = interestPoints('B',3,9, parkingSpotB, closest_parking_lots_B,closestB)
         #School
         parkingSpotC_0 = parkingSpot(0,0,19)
         parkingSpotC_1 = parkingSpot(1,0,20)
@@ -43,7 +47,9 @@ class GPS:
 
         closest_parking_lots_C = ['C', 'B', 'A', 'F', 'G', 'E', 'D']
 
-        interestPointC = interestPoints('C',3,25, parkingSpotC, closest_parking_lots_C)
+        closestC= ['C', 'D', 'E', 'F', 'A', 'B', 'G']
+
+        interestPointC = interestPoints('C',3,25, parkingSpotC, closest_parking_lots_C,closestC)
         
         #Skyscrapper
         parkingSpotD_0 = parkingSpot(0,8,33)
@@ -56,7 +62,9 @@ class GPS:
 
         closest_parking_lots_D = ['D', 'C', 'B', 'A', 'F', 'G', 'E']
 
-        interestPointD = interestPoints('D',9,32, parkingSpotD, closest_parking_lots_D)
+        closestD= ['D', 'E', 'F', 'A', 'B', 'G', 'C']
+
+        interestPointD = interestPoints('D',9,32, parkingSpotD, closest_parking_lots_D,closestD)
         #Building
         parkingSpotE_0 = parkingSpot(0,15,23)
         parkingSpotE_1 = parkingSpot(1,15,24)
@@ -68,7 +76,9 @@ class GPS:
 
         closest_parking_lots_E = ['E', 'D', 'C', 'B', 'A', 'F', 'G']
 
-        interestPointE = interestPoints('E',14,24, parkingSpotE, closest_parking_lots_E)
+        closestE= ['E', 'F', 'A', 'B', 'G', 'C', 'D']
+
+        interestPointE = interestPoints('E',14,24, parkingSpotE, closest_parking_lots_E,closestE)
 
         #Court
         parkingSpotF_0 = parkingSpot(0,15,9)
@@ -81,7 +91,9 @@ class GPS:
 
         closest_parking_lots_F = ['F', 'G', 'E', 'B', 'D', 'C', 'A']
 
-        interestPointF = interestPoints('F',14,10, parkingSpotF, closest_parking_lots_F)
+        closestF= ['F', 'A', 'B', 'G', 'C', 'D', 'E']
+
+        interestPointF = interestPoints('F',14,10, parkingSpotF, closest_parking_lots_F,closestF)
 
         #Market
         parkingSpotG_0 = parkingSpot(0,10,18)
@@ -94,7 +106,9 @@ class GPS:
 
         closest_parking_lots_G = ['G', 'B', 'A', 'F', 'E', 'D', 'C']
 
-        interestPointG = interestPoints('G',8,17, parkingSpotG, closest_parking_lots_G)
+        closestG= ['G', 'F', 'A', 'B', 'C', 'D', 'E']
+
+        interestPointG = interestPoints('G',8,17, parkingSpotG, closest_parking_lots_G,closestG)
 
 
 

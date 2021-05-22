@@ -3,13 +3,14 @@ import pygame as pg
 from .parkingSpot import parkingSpot
 
 class interestPoints:
-    def __init__(self, Id, entryX, entryY, parkingSpots,closest_parking_lots):
+    def __init__(self, Id, entryX, entryY, parkingSpots,closest_parking_lots,closest):
         #gonna have the entries/deliveries of each interest point so each driver knows where to deliver and name
         self.Id = Id
         self.entryX = entryX
         self.entryY = entryY
         #place to park after
         self.parkingSpots = parkingSpots
+        self.closest = closest
         self.closest_parking_lots = closest_parking_lots
         self.paths = {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': []}
         self.pathToA = []

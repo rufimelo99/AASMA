@@ -15,6 +15,7 @@ class Car:
         self.position_y = position_y
         self.caminho = []
         self.local = local
+        self.closestParkinglots = []
         self.person = None
         if(position_x == 3 and position_y < GRID_HEIGHT-4 and position_y >= 3):
             self.orientation = "taxi_SW"
@@ -57,5 +58,42 @@ class Car:
         else:
             self.caminho = []
         self.local = new_local
-        self.state = carState.SEARCH_NEW_PARK        
+        self.state = carState.SEARCH_NEW_PARK  
+    
+    def selectClosestParkingLot(self,interestPointsDic):
+        self.closestParkinglots = interestPointsDic[self.local].closest.copy()
+
+        
+        new_local = self.closestParkinglots.pop(0)
+        print("1novo estacionamento" + new_local)
+
+        if(new_local != self.local):
+            self.caminho = interestPointsDic[self.local].paths[new_local].copy()
+        else:
+            self.caminho = []
+        
+        self.local = new_local
+        self.state = carState.SEARCH_NEW_PARK
+
+
+    
+    def selectClosestParkingLot2(self,interestPointsDic):
+        if(self.closestParkinglots == []):
+            return False
+        new_local = self.closestParkinglots.pop(0)
+        print("2novo estacionamento" + new_local)
+
+        if(new_local != self.local):
+            self.caminho = interestPointsDic[self.local].paths[new_local].copy()
+        else:
+            self.caminho = []
+        
+        self.local = new_local
+        self.state = carState.SEARCH_NEW_PARK
+
+        return True
+        
+
+  
+              
         

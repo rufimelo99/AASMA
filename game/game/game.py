@@ -8,6 +8,8 @@ from .settings import BUILD_SIZE
 from .settings import FPS
 from .utils import draw_text
 from .camera import Camera
+from .hud import Hud
+
 import time
 
 class Game:
@@ -16,7 +18,7 @@ class Game:
         self.screen = screen
         self.clock = clock
         self.width, self.height = self.screen.get_size()
-        
+        self.hud = Hud(self.width,self.height)
         self.world = World(GRID_WIDTH, GRID_HEIGHT, self.width, self.height)
         self.pause = False
         self.width_materials = self.width * 0.65
@@ -87,6 +89,8 @@ class Game:
         
         self.world.draw(self.screen, self.camera,x)
 
+
+        self.hud.draw(self.screen)
         draw_text(
             self.screen,
             'fps={}'.format(round(self.clock.get_fps())),

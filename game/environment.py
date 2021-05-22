@@ -1,7 +1,7 @@
 import pygame as pg
 from game.game import Game
-MOVE = 70
-SPAWN_PEOPLE = 10000
+MOVE = 100
+SPAWN_PEOPLE = 20000
 def main():
 
     running = True
