@@ -19,13 +19,15 @@ class Game:
         self.clock = clock
         self.width, self.height = self.screen.get_size()
         self.hud = Hud(self.width,self.height)
-        self.world = World(GRID_WIDTH, GRID_HEIGHT, self.width, self.height)
+        self.world = World(GRID_WIDTH, GRID_HEIGHT, self.width, self.height,self.hud)
         self.pause = False
         self.width_materials = self.width * 0.65
         self.height_materials = self.height * 0.05
         self.camera = Camera(self.width, self.height)
 
-    def run(self,move_event,spawn_event):
+    def run(self,move_event,spawn_event,move,spawnPeople):
+        self.move = move
+        self.spawnPeople = spawnPeople
         self.playing = True
         self.move_event = move_event
         self.spawn_event = spawn_event
@@ -59,7 +61,7 @@ class Game:
                 if event.key == pg.K_0:
                     self.world.new_caminho()
             if event.type == self.move_event:
-                self.world.update_car()
+                self.world.update_car(self.move)
             if event.type == self.spawn_event:
     
                 self.world.generate_person()
@@ -90,7 +92,7 @@ class Game:
         self.world.draw(self.screen, self.camera,x)
 
 
-        self.hud.draw(self.screen)
+        
         draw_text(
             self.screen,
             'fps={}'.format(round(self.clock.get_fps())),

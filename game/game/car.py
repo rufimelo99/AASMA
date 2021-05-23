@@ -13,6 +13,9 @@ class Car:
         self.parkingSpotID = parkingSpotID
         self.position_x = position_x
         self.position_y = position_y
+        self.numberOfTrips = 0
+        self.waitime = 0
+        self.meanWaitime = 0
         self.caminho = []
         self.local = local
         self.closestParkinglots = []

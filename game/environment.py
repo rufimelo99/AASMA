@@ -1,7 +1,7 @@
 import pygame as pg
 from game.game import Game
-MOVE = 100
-SPAWN_PEOPLE = 20000
+MOVE = 1
+SPAWN_PEOPLE = 1000
 def main():
 
     running = True
@@ -28,7 +28,7 @@ def main():
 
         while playing:
             # game loop here
-            game.run(move_event,spawn_event)
+            game.run(move_event,spawn_event,MOVE,SPAWN_PEOPLE)
 
 if __name__ == "__main__":
     main()

@@ -7,6 +7,8 @@ class Person:
         self.cordenadas = coordenadas
         self.origem = origem
         self.destino = destino
+        self.waitime = 0
+        self.flag = False
         
     
     
