@@ -29,14 +29,14 @@ class Hud:
 
         posx = self.width * 0.5 
         posy = self.height * 0.8
-        for resource in ["id:", "park:","  nº of trips","  wait time" ,"mean wait time", "image:"]:
+        for resource in ["id:", "park:","  nº of trips","mean wait time", "    mean path to client","     mean path to park", "         trips/unit"]:
             draw_text(screen, resource, 25, (255, 255, 255), (posx, posy))
             posx = posx * 1.1
         
         posx = self.width * 0.5 
         posy = posy * 1.04
         for car in carlist:
-            for i in range(5):
+            for i in range(7):
                 if(i == 0):
                     draw_text(screen, " " + str(car.id), 25, (255, 255, 255), (posx, posy))
                     posx = posx * 1.1
@@ -47,11 +47,16 @@ class Hud:
                     draw_text(screen, "       " + str(car.numberOfTrips) , 25, (255, 255, 255), (posx, posy))
                     posx = posx * 1.1
                 elif(i == 3):
-                    draw_text(screen, "     " + str(car.waitime), 25, (255, 255, 255), (posx, posy))
+                    draw_text(screen, "            " + str(round(car.meanWaitime,2)) , 25, (255, 255, 255), (posx, posy))
+                    posx = posx * 1.1
+                elif(i == 4):
+                    draw_text(screen, "                   " + str(round(car.meanlengthpathClient,2)) , 25, (255, 255, 255), (posx, posy))
+                    posx = posx * 1.1
+                elif(i == 5):
+                    draw_text(screen, "                   " + str(round(car.meanpathtoparkinglot,2)) , 25, (255, 255, 255), (posx, posy))
                     posx = posx * 1.1
                 else:
-                    draw_text(screen, "            " + str(car.meanWaitime) , 25, (255, 255, 255), (posx, posy))
-                    
+                    draw_text(screen, "          " + str(round(car.tripsPerTimeUnit,2)) , 25, (255, 255, 255), (posx, posy)) 
             posx = self.width * 0.5 
             posy = posy * 1.04
         

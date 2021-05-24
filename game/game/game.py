@@ -14,23 +14,26 @@ import time
 
 class Game:
 
-    def __init__(self, screen, clock):
+    def __init__(self, screen, clock, mode):
         self.screen = screen
         self.clock = clock
         self.width, self.height = self.screen.get_size()
         self.hud = Hud(self.width,self.height)
-        self.world = World(GRID_WIDTH, GRID_HEIGHT, self.width, self.height,self.hud)
+        self.mode = mode
+        self.world = World(GRID_WIDTH, GRID_HEIGHT, self.width, self.height,self.hud,self.mode)
         self.pause = False
         self.width_materials = self.width * 0.65
         self.height_materials = self.height * 0.05
         self.camera = Camera(self.width, self.height)
+        
 
-    def run(self,move_event,spawn_event,move,spawnPeople):
+    def run(self,move_event,spawn_event,count_event,count,move,spawnPeople):
         self.move = move
         self.spawnPeople = spawnPeople
         self.playing = True
         self.move_event = move_event
         self.spawn_event = spawn_event
+        self.count_envet = count_event
         x = 0
         while self.playing == True:
             self.dt = self.clock.tick(FPS) / 1000
@@ -63,8 +66,9 @@ class Game:
             if event.type == self.move_event:
                 self.world.update_car(self.move)
             if event.type == self.spawn_event:
-    
                 self.world.generate_person()
+            if(event.type == self.count_envet):
+                self.world.add()
                 
 
     def update(self):
