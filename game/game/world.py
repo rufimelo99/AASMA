@@ -33,6 +33,10 @@ class World:
         self.totalpessoas = 0
         self.a = 0
         self.count = 0
+        self.clock = 0
+        self.times = []
+        self.wait_list = []
+        
         
         
 
@@ -44,7 +48,17 @@ class World:
     def new_caminho(self):
         if(self.list_Cars != []):
             for car in self.list_Cars:
-                car.new_caminho()
+                if(car.id == 1):
+                    car.new_caminho1()
+                if(car.id == 2):
+                    car.new_caminho2()
+                if(car.id == 3):
+                    car.new_caminho3()
+
+    def q_values(self):
+        for car in self.list_Cars:
+            print("id" , car.id)
+            print(car.qinit)
     
     def update_car(self,time):
         copy_list_person = self.list_persons.copy()
@@ -71,9 +85,18 @@ class World:
                             print("person origem", person.origem)
                         self.list_persons.remove(person)
                         if(self.mode == 2 and car.numberOfTrips > 0):
-                            car.qlearningIteration(person.destino)
-
+                            cost = car.pathtoparkinglot + car.timeClient + car.lengthpathClient
+                            car.qlearningIteration(car.persondestino,car.local,person.destino,cost)
+                        elif(self.mode == 3 and car.numberOfTrips > 0):
+                            cost = car.pathtoparkinglot + car.timeClient + car.lengthpathClient
+                            for c in self.list_Cars:
+                                c.qlearningIteration(car.persondestino,car.local,person.destino, cost)
                         
+                        car.numberOfPersons += 1
+                        car.allPersonWaitTime += person.waitime
+                        car.meanAllPersonWaitTime = car.allPersonWaitTime/car.numberOfPersons
+                        car.timeClient = person.waitime
+                        car.personWaitime = 0
                         car.setperson(person)
                         car.state = carState.OCCUPIED
                         car.local = person.destino
@@ -92,30 +115,50 @@ class World:
         
         if(self.list_Cars != []):
             for car in self.list_Cars:
+                bol = False
                 if(car.caminho != []):
-                    new = car.caminho.pop(0)
-                    car.update(new[0],new[1]) 
-                    if(car.person != None and car.state == carState.OCCUPIED):
-                        if(car.person.cordenadas[0] == car.position_x and car.person.cordenadas[1] == car.position_y):
-                            self.waitimepersons += car.person.waitime - 1
-                            self.GPS.interestPointsDic[car.person.origem].numberpersons -= 1
-                            car.person.flag = True
-                            self.totalpessoas += 1
-                        else:
-                            if(car.person.flag == False):
-                                car.person.waitime +=1
+                    
+                    
+                    for c in self.list_Cars:
+                        if(car.id != c.id):
+                            if(car.position_x == 13 and car.position_y == 17 and c.position_x == 14 and c.position_y == 18):
+                                bol = True
+                                break
+                            elif(car.position_x == 13 and car.position_y == 17 and c.position_x == 14 and c.position_y == 17):
+                                bol = True
+                                break
+                            elif(car.caminho[0][0] == c.position_x and car.caminho[0][1] == c.position_y):
+                                bol = True
+                                break
+
+
+
+                    if(bol == False): 
+                        new = car.caminho.pop(0)
+                        car.update(new[0],new[1]) 
+                        if(car.person != None and car.state == carState.OCCUPIED):
+                            if(car.person.cordenadas[0] == car.position_x and car.person.cordenadas[1] == car.position_y):
+                                car.personWaitime = car.person.waitime - 1
+                                
+                                self.waitimepersons += car.person.waitime - 1
+                                self.GPS.interestPointsDic[car.person.origem].numberpersons -= 1
+                                car.person.flag = True
+                                self.totalpessoas += 1
+                            else:
+                                if(car.person.flag == False):
+                                    car.person.waitime +=1
                             
-                
                 elif(car.state == carState.OCCUPIED):
                     
                     car.person = None
                     if(self.mode == 0 ):
                         car.selectRandomNewParkingLot(self.locals,self.GPS.interestPointsDic)
-                    elif(self.mode == 2):
+                    elif(self.mode == 1):
+                        car.selectClosestParkingLot(self.GPS.interestPointsDic)
+                    elif(self.mode == 2 or self.mode == 3):
                         state_values = car.qinit[car.mapStates[car.local]].copy()
                         car.selectLearningParkinglot(self.GPS.interestPointsDic, state_values)
-                    else:
-                        car.selectClosestParkingLot(self.GPS.interestPointsDic)
+                    
                    
                 elif(car.state == carState.SEARCH_NEW_PARK):
                     parkingSpot = self.GPS.parkingLot(car.local)
@@ -138,7 +181,7 @@ class World:
                     else:
                         if(self.mode == 0 ):
                             car.selectRandomNewParkingLot2(self.locals,self.GPS.interestPointsDic)
-                        elif(self.mode == 1 or self.mode == 2):
+                        elif(self.mode == 1 or self.mode == 2 or self.mode == 3):
                             if(car.selectClosestParkingLot2(self.GPS.interestPointsDic)):
                                 None
                             else:
@@ -450,22 +493,68 @@ class World:
             for i in range(len(self.GPS.interestPointsDic['A'].parkingSpots)):
                 if(self.GPS.interestPointsDic['A'].parkingSpots[i].Id == 1):
                     self.GPS.interestPointsDic['A'].parkingSpots[i].available=False
+            '''
+            car6 = Car(6, 8, 33, 'D', 0)
+            self.GPS.interestPointsDic['D'].cars.append(car6)
+            for i in range(len(self.GPS.interestPointsDic['D'].parkingSpots)):
+                if(self.GPS.interestPointsDic['D'].parkingSpots[i].Id == 0):
+                    self.GPS.interestPointsDic['D'].parkingSpots[i].available=False
+            
+            car7 = Car(7, 15, 9,  'F', 0)
+            self.GPS.interestPointsDic['F'].cars.append(car7)
+            for i in range(len(self.GPS.interestPointsDic['F'].parkingSpots)):
+                if(self.GPS.interestPointsDic['F'].parkingSpots[i].Id == 0):
+                    self.GPS.interestPointsDic['F'].parkingSpots[i].available=False
 
+            car8 = Car(8, 0, 5,  'B', 0)
+            self.GPS.interestPointsDic['B'].cars.append(car8)
+            for i in range(len(self.GPS.interestPointsDic['B'].parkingSpots)):
+                if(self.GPS.interestPointsDic['B'].parkingSpots[i].Id == 0):
+                    self.GPS.interestPointsDic['B'].parkingSpots[i].available=False
+            
+            car9 = Car(9, 0, 4,  'B', 1)
+            self.GPS.interestPointsDic['B'].cars.append(car9)
+            for i in range(len(self.GPS.interestPointsDic['B'].parkingSpots)):
+                if(self.GPS.interestPointsDic['B'].parkingSpots[i].Id == 1):
+                    self.GPS.interestPointsDic['B'].parkingSpots[i].available=False
+
+            car10 = Car(10, 1, 5,  'B', 2)
+            self.GPS.interestPointsDic['B'].cars.append(car10)
+            for i in range(len(self.GPS.interestPointsDic['B'].parkingSpots)):
+                if(self.GPS.interestPointsDic['B'].parkingSpots[i].Id == 2):
+                    self.GPS.interestPointsDic['B'].parkingSpots[i].available=False
+            '''
             self.list_Cars.append(car)
             self.list_Cars.append(car2)
             self.list_Cars.append(car3)
             self.list_Cars.append(car4)
             self.list_Cars.append(car5)
+            '''
+            self.list_Cars.append(car6)
+            self.list_Cars.append(car7)
+            self.list_Cars.append(car8)
+            self.list_Cars.append(car9)
+            self.list_Cars.append(car10)
+            '''
             self.draw_car_x(screen, camera, car)
             self.draw_car_x(screen, camera, car2)
             self.draw_car_x(screen, camera, car3)
             self.draw_car_x(screen, camera, car4)
             self.draw_car_x(screen, camera, car5)
-        
+            '''
+            self.draw_car_x(screen, camera, car6)
+            self.draw_car_x(screen, camera, car7)
+            self.draw_car_x(screen, camera, car8)
+            self.draw_car_x(screen, camera, car9)
+            self.draw_car_x(screen, camera, car10)
+            '''
       
 
         if(self.totalpessoas != 0):
             self.meanwaitimepersons = self.waitimepersons/self.totalpessoas
+            self.clock += 1
+            self.times.append(self.clock)
+            self.wait_list.append(self.meanwaitimepersons)
         self.hud.draw(self.list_Cars,screen,self.meanwaitimepersons)
             
             

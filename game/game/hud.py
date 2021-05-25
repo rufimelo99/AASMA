@@ -29,7 +29,7 @@ class Hud:
 
         posx = self.width * 0.5 
         posy = self.height * 0.8
-        for resource in ["id:", "park:","  nº of trips","mean wait time", "    mean path to client","     mean path to park", "         trips/unit"]:
+        for resource in ["id:", "park:","  nº of trips","mean wait time", "    mean path to client","     mean path to park", "         mean person waitime"]:
             draw_text(screen, resource, 25, (255, 255, 255), (posx, posy))
             posx = posx * 1.1
         
@@ -56,7 +56,7 @@ class Hud:
                     draw_text(screen, "                   " + str(round(car.meanpathtoparkinglot,2)) , 25, (255, 255, 255), (posx, posy))
                     posx = posx * 1.1
                 else:
-                    draw_text(screen, "          " + str(round(car.tripsPerTimeUnit,2)) , 25, (255, 255, 255), (posx, posy)) 
+                    draw_text(screen, "          " + str(round(car.meanAllPersonWaitTime,2)) , 25, (255, 255, 255), (posx, posy)) 
             posx = self.width * 0.5 
             posy = posy * 1.04
         

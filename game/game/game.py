@@ -1,5 +1,7 @@
 import pygame as pg
 import sys
+import seaborn as sns
+import matplotlib.pyplot as plt
 from .world import World
 from .settings import TILE_SIZE
 from .settings import GRID_WIDTH
@@ -63,6 +65,10 @@ class Game:
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_0:
                     self.world.new_caminho()
+                if event.key == pg.K_9:
+                    self.world.q_values()
+                if event.key == pg.K_x:
+                    self.plot()
             if event.type == self.move_event:
                 self.world.update_car(self.move)
             if event.type == self.spawn_event:
@@ -74,6 +80,29 @@ class Game:
     def update(self):
 
         self.camera.update()
+    
+    def plot(self):
+    
+        
+
+        sns.set_theme(style="darkgrid")
+        
+        '''
+        f = open('myfile.txt', 'w+')
+        f.write('times = [')
+        for i in range(len(self.world.times) - 1):
+            f.write(str(i) + ', ')
+
+        f.write(str(i))
+        f.write(']')
+        '''
+        
+        sns.lineplot(self.world.times, self.world.wait_list)
+        
+
+        #f.close()
+        
+        plt.show()
 
     def paused(self):
         while self.pause:
