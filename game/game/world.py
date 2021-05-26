@@ -36,6 +36,9 @@ class World:
         self.clock = 0
         self.times = []
         self.wait_list = []
+        self.all_cars_path_to_client = []
+        self.all_cars_path_to_park = []
+        self.all_cars_wait_time_client = []
         
         
         
@@ -81,14 +84,14 @@ class World:
                             car.caminho = self.GPS.interestPointsDic[park].paths[person.destino].copy()   
                             car.lengthpathClient = 0
                             car.allengthpathClient += 0
-                        if(car.id == 1):
-                            print("person origem", person.origem)
                         self.list_persons.remove(person)
                         if(self.mode == 2 and car.numberOfTrips > 0):
-                            cost = car.pathtoparkinglot + car.timeClient + car.lengthpathClient
+                            #cost = car.pathtoparkinglot + car.timeClient + car.lengthpathClient
+                            cost = car.pathtoparkinglot + car.lengthpathClient
                             car.qlearningIteration(car.persondestino,car.local,person.destino,cost)
                         elif(self.mode == 3 and car.numberOfTrips > 0):
-                            cost = car.pathtoparkinglot + car.timeClient + car.lengthpathClient
+                            #cost = car.pathtoparkinglot + car.timeClient + car.lengthpathClient
+                            cost = car.pathtoparkinglot + car.lengthpathClient
                             for c in self.list_Cars:
                                 c.qlearningIteration(car.persondestino,car.local,person.destino, cost)
                         
@@ -213,6 +216,11 @@ class World:
         ticketE = int(random.random() * 99) + 1 
         ticketF = int(random.random() * 99) + 1 
         ticketG = int(random.random() * 99) + 1
+
+        prob = int(random.random() * 99) + 1
+
+        if(prob <=5):
+            print("penis")
         
         if(ticketA <= 80): #40 #80
             
@@ -306,7 +314,7 @@ class World:
             self.GPS.interestPointsDic['G'].numberpersons += 1
             self.list_persons.append(personG)
         
-        print(pessoas)
+        
 
         
         
@@ -387,7 +395,7 @@ class World:
             else:        
                 render_pos =  self.world[x][y]["render_pos"]
                 screen.blit(self.tiles["road_x"], (render_pos[0] + self.width_materials + camera.scroll.x , render_pos[1] + camera.scroll.y + self.height_materials))
-    
+
 
     def draw_car_x(self, screen, camera, car):
         render_pos =  self.world[car.position_x][car.position_y]["render_pos"]
@@ -420,7 +428,15 @@ class World:
                 if( x == int(GRID_WIDTH*0.7) and y == int(GRID_HEIGHT*0.35)):
                     screen.blit(self.tiles["court"], (render_pos[0] + self.width_materials + camera.scroll.x, render_pos[1] + camera.scroll.y + (self.height_materials - (self.tiles["court"].get_height() - TILE_SIZE))* 1.4))
                 
+                for park in self.GPS.interestPointsDic:
+                    size = len(self.GPS.interestPointsDic[park].parkingSpots)
+                    for z in range(size):
+                        if(x == self.GPS.interestPointsDic[park].parkingSpots[z].posX and y == self.GPS.interestPointsDic[park].parkingSpots[z].posY):
+                            screen.blit(self.tiles["pavement"], (render_pos[0] + self.width_materials + camera.scroll.x , render_pos[1] + camera.scroll.y + self.height_materials))
+
                 
+                            
+                    
 
                 #p = self.world[x][y]["iso_poly"]
                 #p = [(x + self.width_materials, y + self.height_materials) for x, y in p] #change position grid
@@ -555,6 +571,21 @@ class World:
             self.clock += 1
             self.times.append(self.clock)
             self.wait_list.append(self.meanwaitimepersons)
+            all_pathClient = 0
+            all_pathPark = 0
+            all_carClientwaitime = 0
+            size = len(self.list_Cars)
+            for c in self.list_Cars:
+                all_pathClient += c.meanlengthpathClient
+                all_pathPark += c.meanpathtoparkinglot
+                all_carClientwaitime += c.meanAllPersonWaitTime
+
+
+            self.all_cars_path_to_client.append((all_pathClient/size))
+            self.all_cars_path_to_park.append((all_pathPark/size))
+            self.all_cars_wait_time_client.append((all_carClientwaitime/size))
+        
+        
         self.hud.draw(self.list_Cars,screen,self.meanwaitimepersons)
             
             

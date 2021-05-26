@@ -37,8 +37,27 @@ class Game:
         self.spawn_event = spawn_event
         self.count_envet = count_event
         x = 0
+        time_elapsed_since_last_action1 = 0
+        time_elapsed_since_last_action2 = 0
+        time_elapsed_since_last_action3 = 0
         while self.playing == True:
-            self.dt = self.clock.tick(FPS) / 1000
+            self.dt = self.clock.tick(FPS)
+            '''
+            time_elapsed_since_last_action1 += self.dt
+            time_elapsed_since_last_action2 += self.dt
+            time_elapsed_since_last_action3 += self.dt
+            if time_elapsed_since_last_action1 > 100:
+                self.world.update_car(self.move)
+                time_elapsed_since_last_action1 = 0
+            
+            if time_elapsed_since_last_action2 > 3000:
+                self.world.generate_person()
+                time_elapsed_since_last_action2 = 0
+            
+            if time_elapsed_since_last_action3 > 1000:
+                self.world.add()
+                time_elapsed_since_last_action3 = 0
+            '''
             self.events()
             self.update()
             self.draw(x)
@@ -82,25 +101,51 @@ class Game:
         self.camera.update()
     
     def plot(self):
-    
         
-
-        sns.set_theme(style="darkgrid")
         
-        '''
-        f = open('myfile.txt', 'w+')
-        f.write('times = [')
+        
+        f = open('communicationplot_teste2.py', 'w+')
+        f.write('communication_times = [')
         for i in range(len(self.world.times) - 1):
-            f.write(str(i) + ', ')
+            f.write(str(self.world.times[i]) + ', ')
 
-        f.write(str(i))
-        f.write(']')
-        '''
+        f.write(str(self.world.times[-1]))
+        f.write(']\n')
+
+        f.write('communication_times_total = [')
+        for i in range(len(self.world.wait_list) - 1):
+            f.write(str(self.world.wait_list[i]) + ', ')
+
+        f.write(str(self.world.wait_list[-1]))
+        f.write(']\n')
+
+        f.write('communication_path_length_client = [')
+        for i in range(len(self.world.all_cars_path_to_client) - 1):
+            f.write(str(self.world.all_cars_path_to_client[i]) + ', ')
+
+        f.write(str(self.world.all_cars_path_to_client[-1]))
+        f.write(']\n')
+
+        f.write('communication_path_length_park = [')
+        for i in range(len(self.world.all_cars_path_to_park) - 1):
+            f.write(str(self.world.all_cars_path_to_park[i]) + ', ')
+
+        f.write(str(self.world.all_cars_path_to_park[-1]))
+        f.write(']\n')
+
+        f.write('communication_time_avalable = [')
+        for i in range(len(self.world.all_cars_wait_time_client) - 1):
+            f.write(str(self.world.all_cars_wait_time_client[i]) + ', ')
+
+        f.write(str(self.world.all_cars_wait_time_client[-1]))
+        f.write(']\n')
+
         
-        sns.lineplot(self.world.times, self.world.wait_list)
         
 
-        #f.close()
+        
+
+        f.close()
         
         plt.show()
 
