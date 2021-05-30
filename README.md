@@ -14,6 +14,11 @@
     <a href="https://tecnico.ulisboa.pt/en/">IST</a>
   </p>
 </p>
+Members:
+
+* [José	Cruz](https://github.com/josecruz90742)
+* [Pedro	Monteiro](https://github.com/ErisBot)
+* [Rui Melo](https://github.com/rufimelo99)
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
