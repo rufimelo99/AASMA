@@ -14,11 +14,6 @@
     <a href="https://tecnico.ulisboa.pt/en/">IST</a>
   </p>
 </p>
-Members:
-
-* [José	Cruz](https://github.com/josecruz90742)
-* [Pedro	Monteiro](https://github.com/ErisBot)
-* [Rui Melo](https://github.com/rufimelo99)
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
@@ -218,7 +213,10 @@ Figure 7 and 8 show that with more agents not only the time a client waits for a
 
 Furthermore, with 10 agents the number of parking spots is not a determinant factor in the results
 
+
 ![Fig7](https://user-images.githubusercontent.com/44201826/120087990-65ec6600-c0e4-11eb-9106-a9c50447dc5b.PNG)
+
+
 ![Fig8](https://user-images.githubusercontent.com/44201826/120087991-6684fc80-c0e4-11eb-9967-5fc40a942baa.PNG)
 
 Finally, we wanted to test if the agents were capable of learning the interest points with highest probabilities of spawning a client.
