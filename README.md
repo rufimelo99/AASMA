@@ -193,6 +193,8 @@ As explained, the Nearest approach in this specific environment with this exact 
 | Chosen Park by ML Agents   |A|B|C|E|E|F|G|
 
 `Table 1 - Learning Agents Policy`
+
+
 In order to verify the hypothesis mentioned priorly and further verify conclusions, the environment was tested by having 7 agents instead of 5.
 
 As a hypothesis, it was suggested that the performance regarding the time that a client has to wait for a ride was directly dependent on the environment, more specifically, to the amount of agents present and the spawning rates. It can be further concluded, by Figure 5 and Figure 6 that when presented with a bigger number of clients, the performance attached to the Nearest approach lowered.
