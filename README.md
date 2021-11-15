@@ -76,7 +76,7 @@ We’ll study 4 cases involving learning and reactive agents that will ultimatel
 ## Approach
 The environment consists of a 2-D city with 7 different interest points with those being a hospital, a restaurant, a school, a shopping center, a set of apartments, a court and a market, represented by letters from A to G, respectively. These points are connected through a simple one-way road. The city is placed over a grid to simplify the movement process and overall city creation. 
 
-![Fig1](https://user-images.githubusercontent.com/44201826/120087984-6422a280-c0e4-11eb-8b9d-ac20fdd5c08c.PNG)
+![Fig1](https://github.com/rufimelo99/AASMA/blob/main/images/1.png?raw=true)
 
 Each interest point has a parking lot with 3 parking slots to allow the agents to wait there while parked. It would not be good if the agents were driving around until they found clients as they would in a real context lose gas. So, after leaving a client, each agent will either stay at that interest point parking lot or drive to another interest point and wait in its parking lot. 
 
@@ -167,7 +167,7 @@ More iterations would cause the Learning by Itself agents, that are slower in le
 
 The values presented in the chart presented in Figure 2 would vary even more if the amount of passengers at each moment decreased, their overall spawning probabilities went down or a different number of cars (hypothesis tested ahead). This way, if the agents did not recognize a semi-optimal place to wait for customers, they would have to travel more than they did in this scenario.
 
-![Fig2](https://user-images.githubusercontent.com/44201826/120087985-64bb3900-c0e4-11eb-9555-db0f807d652e.PNG)
+![Fig2](https://github.com/rufimelo99/AASMA/blob/main/images/2.png?raw=true)
 
 The second metric used to evaluate the different approaches was the distance each Agent travels to a parking lot after delivering a customer to its destination.
 
@@ -175,7 +175,7 @@ Obviously, as seen in Figure 3, the expected lower value is the approach where a
 
 The next best approaches are Communication and Learning, with Communication outperforming the Learning by 16% after 25000 iterations. To be noted that, even though the Learning approach can convergence to numbers identical to the Communication in terms of performing eventually, having multiple agents communicating in an environment can lead to achieve better results faster (less iterations).
 
-![Fig3](https://user-images.githubusercontent.com/44201826/120087986-6553cf80-c0e4-11eb-89cf-b8a15cab333c.PNG)
+![Fig3](https://github.com/rufimelo99/AASMA/blob/main/images/3.png?raw=true)
 
 The third metric is regarding the quality of service, more specifically, the amount of time a client has to wait for an agent to arrive at its location, Figure 4.
 
@@ -183,7 +183,7 @@ The worst scenario is regarding the Random approach. Having the agents positione
 
 In our environment, the best performing approach regarding this metric is the Nearest approach. Currently, we have 5 agents for 7 interest points, meaning that, even with all the agents spread randomly, they might attend their clients with a good performance. In a larger environment or with a lower number of agents, both the Learning and Communicating approaches would outperform the Nearest one, since spreading randomly would not provide a consistent faster service.
 
-![Fig4](https://user-images.githubusercontent.com/44201826/120087987-6553cf80-c0e4-11eb-9a71-1bc87c589c12.PNG)
+![Fig4](https://github.com/rufimelo99/AASMA/blob/main/images/4.png?raw=true)
 
 All things considered, with 7 interest points and 5 agents operating in the city, we can see that having a Random Policy is, as expected, not ideal in any scenario and the agents should be able to have a defined policy associated.
 
@@ -209,8 +209,8 @@ Once again, the Communication Agents may seem to be worse than the single learni
 
 It is notable that with a bigger number of agents the Purely Reactive agent has a worse overall performance than the Hybrid Ones, if we take in consideration not only these 2 charts but the distance to pick up the client as well that is better in the Hybrid Agents by about 22%.
 
-![Fig5](https://user-images.githubusercontent.com/44201826/120087988-65ec6600-c0e4-11eb-89c4-b6d1a15cb73f.PNG)
-![Fig6](https://user-images.githubusercontent.com/44201826/120087989-65ec6600-c0e4-11eb-9608-f155a2c2aeb0.PNG)
+![Fig5](https://github.com/rufimelo99/AASMA/blob/main/images/5.png?raw=true)
+![Fig6](https://github.com/rufimelo99/AASMA/blob/main/images/6.png?raw=true)
 
 
 To further evaluate the impact of having more cars we decided to test again but this time with 10 agents. Not only that but with a higher number of agents it is also interesting to evaluate if a higher number of parking spots would make a difference.
@@ -220,10 +220,10 @@ Figure 7 and 8 show that with more agents not only the time a client waits for a
 Furthermore, with 10 agents the number of parking spots is not a determinant factor in the results
 
 
-![Fig7](https://user-images.githubusercontent.com/44201826/120087990-65ec6600-c0e4-11eb-9106-a9c50447dc5b.PNG)
+![Fig7](https://github.com/rufimelo99/AASMA/blob/main/images/7.png?raw=true)
 
 
-![Fig8](https://user-images.githubusercontent.com/44201826/120087991-6684fc80-c0e4-11eb-9967-5fc40a942baa.PNG)
+![Fig8](https://github.com/rufimelo99/AASMA/blob/main/images/8.png?raw=true)
 
 Finally, we wanted to test if the agents were capable of learning the interest points with highest probabilities of spawning a client.
 
